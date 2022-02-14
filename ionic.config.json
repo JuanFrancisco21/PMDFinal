@@ -1,0 +1,7 @@
+{
+  "name": "Dailylog",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
