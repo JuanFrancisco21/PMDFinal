@@ -6,12 +6,18 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { WorkServiceService } from './Services/work-service.service';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [BrowserModule,
+    HttpClientModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule],
+  providers: [HttpClient,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },WorkServiceService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
