@@ -1,17 +1,56 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"  >
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+      {{'WORK' | translate | titlecase}}
     </ion-title>
+    <ion-button slot="end" class="button-logout" color="danger" (click)="logout()">{{'LOGOUT' | translate | titlecase}}</ion-button>
+ 
   </ion-toolbar>
+  <ion-item>
+    <ion-searchbar (ionChange)="onInput($event)" placeholder="{{'SEARCHWORK' | translate }}" animated></ion-searchbar>
+  </ion-item>
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-refresher slot="fixed" (ionRefresh)="cargaObras($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+
+    <ion-item-sliding *ngFor="let obra of obras | filtro:textoBuscar;let i=index " >
+      <ion-item-options side="start">
+        <ion-item-option color="primary" (click)="edita(obra)">
+          <ion-icon name="create" style="zoom:3.0"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+  
+      <ion-item>
+        <ion-label>
+          <h2>{{obra.name}}</h2>
+          <p>
+            {{obra.description}}
+          </p>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item-options side="end">
+        <ion-item-option color="danger" expandable (click)="borra(obra)">
+          <ion-icon name="remove-circle" style="zoom:3.0"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="cargaInfinita($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
