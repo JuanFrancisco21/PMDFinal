@@ -11,6 +11,10 @@ export class WorkerService {
 
   constructor(public http: HttpClient) { }
 
+  /**
+   * Function which gathers all worker from the database
+   * @returns all workers stored in the database
+   */
   public async getAllWorkers(): Promise<Worker[]> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -22,6 +26,11 @@ export class WorkerService {
     });
   }
 
+  /**
+   * Function which finds a worker in the database based on their id
+   * @param workerId the id we will use to search the database
+   * @returns the worker with the matching id
+   */
   public async getWorkerById(workerId: Number): Promise<Worker> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -33,6 +42,11 @@ export class WorkerService {
     });
   }
 
+  /**
+   * Function which finds a worker in the database based on their name
+   * @param workerName the name we will use to search the database
+   * @returns the woker with the matching name
+   */
   public async getWorkerByName(workerName: String): Promise<Worker> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -44,6 +58,11 @@ export class WorkerService {
     });
   }
 
+  /**
+   * Function which gathers all workers who's active is the desginated value
+   * @param active the boolean which contains the value we will search for
+   * @returns the workers with the matching value
+   */
   public async getWorkerByActive(active: Boolean): Promise<Worker[]> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -55,6 +74,11 @@ export class WorkerService {
     });
   }
 
+  /**
+   * Function which instantiates a worker into the database
+   * @param worker the worker to be instantiated
+   * @returns the instantiated worker
+   */
   public async createWorker(worker: Worker): Promise<Worker> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -66,6 +90,11 @@ export class WorkerService {
     });
   }
 
+  /**
+   * Function which updates a worker in the database
+   * @param worker the worker to be instantiated
+   * @returns the updated worker
+   */
   public async updateWorker(worker: Worker): Promise<Worker> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -77,6 +106,11 @@ export class WorkerService {
     });
   }
 
+  /**
+   * Function which deletes a worker from the database
+   * @param workerId the id of the worker to be purged from the database
+   * @returns the deleted worker
+   */
   public async deleteWorkerById(workerId: Number): Promise<Worker> {
     return new Promise(async (resolve, reject) => {
       try {
