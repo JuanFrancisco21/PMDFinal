@@ -4,5 +4,6 @@ export const environment = {
   apiWork: 'work/',
   apiWorker: 'worker/',
   apiName: 'name/',
-  apiActive: 'active/'
+  apiActive: 'active/',
+  apiDailylog: 'dailylogs/'
 };
