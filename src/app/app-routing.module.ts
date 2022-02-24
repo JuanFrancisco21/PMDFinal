@@ -13,7 +13,11 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule)
+  },  {
+    path: 'worker-creator',
+    loadChildren: () => import('./Pages/worker/worker-creator/worker-creator.module').then( m => m.WorkerCreatorPageModule)
   }
+
   
 ];
 @NgModule({

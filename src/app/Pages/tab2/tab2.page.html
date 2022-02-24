@@ -1,17 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      Lista Empleados
     </ion-title>
   </ion-toolbar>
+
+  <ion-item>
+    <ion-searchbar placeholder="Buscar" animated></ion-searchbar>
+  </ion-item>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-list>
+
+    <!-- <ion-item-sliding *ngFor="let worker of workers | filtro:textoBuscar;let i=index " >
+    
+    </ion-item-sliding> -->
+
+    <ion-item *ngFor="let worker of workers">
+      <ion-avatar slot="start">
+        <!-- <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"> -->
+      </ion-avatar>
+      <ion-label>
+        <h2>{{worker.name}}</h2>
+        <p>
+          {{worker.surname}}
+        </p>
+      </ion-label>
+    </ion-item>
+    
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openCreator()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
