@@ -4,6 +4,8 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
+import { AngularFireModule} from '@angular/fire/compat'
+import { AngularFirestoreModule} from '@angular/fire/compat/firestore'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule} from '@angular/common/http';
@@ -12,6 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { PipesModule } from './Services/pipes/pipes.module';
+import { LocalstorageService } from './Services/localstorage.service';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './Services/auth.service';
+import { AuthguardService } from './Services/authguard.service';
 
 export function loadTranslator(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -27,6 +33,8 @@ export function loadTranslator(http: HttpClient){
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     PipesModule,
     TranslateModule.forRoot({
       loader : {
@@ -36,7 +44,7 @@ export function loadTranslator(http: HttpClient){
       }
     })
           ], 
-  providers: [HttpClient,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, WorkService],
+  providers: [HttpClient,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, WorkService, WorkService, LocalstorageService, AuthService, AuthguardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

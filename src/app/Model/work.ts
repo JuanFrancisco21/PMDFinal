@@ -5,8 +5,10 @@ export interface Work {
     id?:Number,
     name:String,
     description:String,
-    latitud:Number,
-    longitud:Number,
+    location:[
+        x:Number,
+        y:Number,
+    ],
     chief:Worker,
     workerWork:Array<Workerwork>
 }
