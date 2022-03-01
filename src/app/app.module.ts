@@ -18,6 +18,7 @@ import { LocalstorageService } from './Services/localstorage.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './Services/auth.service';
 import { AuthguardService } from './Services/authguard.service';
+import { AddworkPage } from './Pages/Work/addwork/addwork.page';
 
 export function loadTranslator(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

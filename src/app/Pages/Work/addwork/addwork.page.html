@@ -1,30 +1,41 @@
 <ion-header>
   <ion-toolbar>
+    <ion-icon name="arrow-back-outline" slot="start" (click)="goBack()"></ion-icon>
     <ion-title>{{'ADDWORK' | translate | titlecase}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset 2">
-      <a class="btn btn-primary float-md-right" routerLink="/proveedores">Regresar al listado</a>
-      <br>
-      <form [formGroup]="proveedorForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" formControlName="name">
-        </div>
-        <div class="form-group">
-          <label for="description">Descripcion</label>
-          <input type="text" class="form-control" id="description" formControlName="description">
-        </div>
-
-
-        
-        <button type="submit" class="btn btn-success" [disabled]="!workForm.valid">Añadir Proveedor</button>
-        <p class="alert alert-danger " *ngIf="!workForm.valid">Por favor complete todos los campos</p>
-      </form>
-      <hr>
-    </div>
-  </div>
+  <form [formGroup]="workForm" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div style="margin-top: 10px; ">
+            <div>
+              <ion-label>Nombre</ion-label>
+              <ion-item>
+                <ion-input formControlName="name" name="name" type="text" placeholder="Introduce el Nombre" ngModel
+                  required></ion-input>
+              </ion-item>
+            </div>
+            <div>
+              <ion-label>Descripcion</ion-label>
+              <ion-item >
+                <ion-textarea formControlName="description" name="description" type="text" placeholder="Introduce descripcion" ngModel required></ion-textarea>
+              </ion-item>
+            </div>
+            <div>
+              <ion-label>Encargado</ion-label>
+              <ion-select formControlName="chief" [compareWith]="compareWith">
+                <ion-select-option *ngFor="let worker of workers" [value]="worker">{{worker.name + ' ' + worker.surname}}</ion-select-option>
+              </ion-select>
+            </div>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="workForm.invalid" expand="block">Añadir Obra</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

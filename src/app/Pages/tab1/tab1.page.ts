@@ -113,6 +113,6 @@ export class Tab1Page {
    * Redireccionamiento a la pagina de creacion de obras.
    */
   public addwork(){
-    this.router.navigate(['addwork/']);
+    this.router.navigate(['addwork']);
   }
 }

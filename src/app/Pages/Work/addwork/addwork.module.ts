@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddworkPageRoutingModule } from './addwork-routing.module';
 
 import { AddworkPage } from './addwork.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { AddworkPage } from './addwork.page';
     FormsModule,
     IonicModule,
     AddworkPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   declarations: [AddworkPage]
 })
