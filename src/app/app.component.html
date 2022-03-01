@@ -1,3 +1,44 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <ion-menu side="start" menu-id="first" content-id="main">
+    <ion-header>
+      <ion-toolbar class="user-profile">
+        <ion-grid>
+
+          <ion-row>
+            <ion-col >
+              <div class="header">
+                <img src="../assets/imgs/user.jpg" class="userPhoto">
+              </div>
+              <div class="header">
+                <h2>
+                  Juan
+                </h2>
+                <span>Desarrollador</span>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="other-data">
+            <ion-col style="align-items: flex-end;">
+              <button ion-button icon-left small full class="column" menuClose (click)="logout()">
+                <ion-icon name="log-out"></ion-icon>
+                {{'LOGOUT' | translate | titlecase}}
+              </button>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        ES <ion-toggle #mitoogle color="light" (ionChange)=cambiaIdioma($event)></ion-toggle> EN
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

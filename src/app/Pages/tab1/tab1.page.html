@@ -4,37 +4,33 @@
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title >
-      {{'WORK' | translate | titlecase}}
+      {{'WORKLIST' | translate | titlecase}}
     </ion-title>
-    <ion-button slot="end" class="button-logout" color="danger" (click)="logout()">{{'LOGOUT' | translate | titlecase}}</ion-button>
- 
   </ion-toolbar>
-  <ion-item>
-    <ion-searchbar (ionChange)="onInput($event)" placeholder="{{'SEARCHWORK' | translate }}" animated></ion-searchbar>
-  </ion-item>
-
 </ion-header>
+
 
 <ion-content [fullscreen]="true">
 
   <ion-refresher slot="fixed" (ionRefresh)="cargaObras($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
+  <ion-list >
 
-    <ion-item-sliding *ngFor="let obra of obras | filtro:textoBuscar;let i=index " >
+    <ion-item-sliding *ngFor="let obra of obras | filtro:textoBuscar;let i=index ">
       <ion-item-options side="start">
         <ion-item-option color="primary" (click)="edita(obra)">
           <ion-icon name="create" style="zoom:3.0"></ion-icon>
         </ion-item-option>
       </ion-item-options>
   
-      <ion-item>
+      <ion-item style="background-color: black;">
+        <ion-avatar class="avatar" item-start>
+          <img src="../../../assets/imgs/obra.jpg">
+        </ion-avatar>
         <ion-label>
           <h2>{{obra.name}}</h2>
-          <p>
-            {{obra.description}}
-          </p>
+          <p>{{obra.description}}</p>
         </ion-label>
       </ion-item>
   
@@ -47,10 +43,9 @@
 
   </ion-list>
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="cargaInfinita($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  <ion-fab class="addbutton" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addwork()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

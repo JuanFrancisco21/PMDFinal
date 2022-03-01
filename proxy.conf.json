@@ -1,6 +1,6 @@
 {
     "/work":{
-        "target":"http://localhost:8080",
+        "target":"https://dalilylog.herokuapp.com",
         "changeOrigin":true,
         "secure":false,
         "logeLevel":"debug"

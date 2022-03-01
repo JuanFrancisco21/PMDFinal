@@ -1,5 +1,7 @@
 {
-    "WORK":"OBRAS",
+    "ADDWORK":"Crear Obra",
+    "WORKLIST":"Lista de Obras",
+    "SEARCHWORK":"Buscar Trabajo",
     "HELLO":"hola",
     "BYE":"adiós",
     "TAKE A PICTURE":"Fotografiar",

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IonInfiniteScroll, ModalController, NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Work } from 'src/app/Model/work';
+import { AuthService } from 'src/app/Services/auth.service';
 import { NotificationsService } from 'src/app/Services/notifications.service';
 import { WorkService } from 'src/app/Services/work.service';
 
@@ -22,6 +23,7 @@ export class Tab1Page {
     public modalController: ModalController,
     private notifications: NotificationsService,
     private router: Router,
+    private authS: AuthService,
     private navCtrl: NavController) { }
 
     /**
@@ -88,7 +90,7 @@ export class Tab1Page {
    * Método para cerrar sesión, volviendo al login.
    */
   public async logout() {
-    //await this.authS.logout();
+    await this.authS.logout();
     this.router.navigate(['']);
   }
 
@@ -108,10 +110,9 @@ export class Tab1Page {
   }
 
   /**
-   * Redireccionamiento a la pagina de lectura de notas.
-   * @param nota que se va a enviar a tab3
+   * Redireccionamiento a la pagina de creacion de obras.
    */
-  public irtab3(obra: Work){
-    this.navCtrl.navigateForward(['private/tabs/tab3',{data:JSON.stringify(obra)}]);
+  public addwork(){
+    this.router.navigate(['addwork/']);
   }
 }
