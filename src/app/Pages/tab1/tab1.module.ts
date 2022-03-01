@@ -19,7 +19,6 @@ import { PipesModule } from 'src/app/Services/pipes/pipes.module';
     TranslateModule,
     ReactiveFormsModule,
     PipesModule
-
   ],
   declarations: [Tab1Page]
 })
