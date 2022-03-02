@@ -14,7 +14,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed">
+
+  <ion-refresher slot="fixed" (ionRefresh)="loadWorkers($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
@@ -24,18 +25,16 @@
     
     </ion-item-sliding> -->
 
-    <ion-item *ngFor="let worker of workers">
+    <ion-item *ngFor="let worker of workers" (click)="openEditor(worker)">
       <ion-avatar class="avatar" item-start>
-        <img src="../../../assets/imgs/obra.jpg">
+        <img src="../../../assets/imgs/user.jpg">
       </ion-avatar>
       <ion-label>
         <h2>{{worker.name}}</h2>
-        <p>
-          {{worker.surname}}
-        </p>
+        <p>{{worker.surname}}</p>
       </ion-label>
     </ion-item>
-    
+
   </ion-list>
 
   <ion-fab class="addbutton" vertical="bottom" horizontal="end" slot="fixed">
