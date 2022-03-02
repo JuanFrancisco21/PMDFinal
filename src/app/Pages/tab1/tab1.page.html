@@ -6,7 +6,6 @@
     <div style="margin-top: 5px;">
       <img src="../../../assets/imgs/Logo.png">
     </div>
-
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +18,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="cargaObras($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
+  <ion-list lines="none">
 
     <ion-item-sliding *ngFor="let obra of obras | filtro:textoBuscar;let i=index ">
 
