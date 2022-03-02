@@ -1,30 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start"  >
+    <ion-buttons slot="start">
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title >
-      {{'WORKLIST' | translate | titlecase}}
-    </ion-title>
+    <div style="margin-top: 5px;">
+      <img src="../../../assets/imgs/Logo.png">
+    </div>
+
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content [fullscreen]="true">
+  <ion-title >
+    {{'WORKLIST' | translate | titlecase}}
+  </ion-title>
 
   <ion-refresher slot="fixed" (ionRefresh)="cargaObras($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list >
+  <ion-list>
 
     <ion-item-sliding *ngFor="let obra of obras | filtro:textoBuscar;let i=index ">
-      <ion-item-options side="start">
-        <ion-item-option color="primary" (click)="edita(obra)">
-          <ion-icon name="create" style="zoom:3.0"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-  
-      <ion-item style="background-color: black;">
+
+      <ion-item>
+
         <ion-avatar class="avatar" item-start>
           <img src="../../../assets/imgs/obra.jpg">
         </ion-avatar>
@@ -32,8 +32,9 @@
           <h2>{{obra.name}}</h2>
           <p>{{obra.description}}</p>
         </ion-label>
+        <ion-icon color="primary" name="arrow-forward-outline"></ion-icon>
       </ion-item>
-  
+
       <ion-item-options side="end">
         <ion-item-option color="danger" expandable (click)="borra(obra)">
           <ion-icon name="remove-circle" style="zoom:3.0"></ion-icon>
