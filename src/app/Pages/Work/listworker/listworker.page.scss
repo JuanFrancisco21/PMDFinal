@@ -1,0 +1,43 @@
+ion-title,ion-toolbar{
+    font-size: x-large;
+    font-family: 'Times New Roman';
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    padding-right: 25px;
+
+}
+ion-toolbar{
+    font-size: x-large;
+    font-family: 'Times New Roman';
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    padding-right: 25px;
+
+}
+ion-icon{
+    margin-left: 10px;
+}
+ion-select{
+    --background: #ffffff;
+    --color: rgb(105, 105, 105);
+    margin: 10px;
+    border-radius: 6px;
+    border: #252525 solid 1px;
+}
+ion-label{
+    margin-left: 5%;
+    margin-right: 20%;
+    font-size: large;
+}
+ion-button{
+    font-size: x-large;
+    font-family: 'Times New Roman';
+    color: black;
+    text-align: center;
+    margin: 10px;
+}
+div{
+    margin-bottom: 20px;
+}

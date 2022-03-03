@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { WorkerEditorPageRoutingModule } from './worker-editor-routing.module';
 
-import { HomePage } from './home.page';
+import { WorkerEditorPage } from './worker-editor.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    WorkerEditorPageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [WorkerEditorPage]
 })
-export class HomePageModule {}
+export class WorkerEditorPageModule {}

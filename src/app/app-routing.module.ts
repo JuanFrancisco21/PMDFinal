@@ -4,17 +4,28 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./Pages/welcome/welcome.module').then( m => m.WelcomePageModule)
+    loadChildren: () => import('./Pages/welcome/welcome.module').then(m => m.WelcomePageModule)
   },
   {
-    path: 'login',
-    loadChildren: () => import('./Pages/home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'tabs',
+    path: 'main',
     loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'addwork',
+    loadChildren: () => import('./Pages/Work/addwork/addwork.module').then(m => m.AddworkPageModule)
+  },
+  {
+    path: 'worker-creator',
+    loadChildren: () => import('./Pages/worker/worker-creator/worker-creator.module').then(m => m.WorkerCreatorPageModule)
+  },
+  {
+    path: 'worker-editor',
+    loadChildren: () => import('./Pages/worker/worker-editor/worker-editor.module').then( m => m.WorkerEditorPageModule)
+  },  {
+    path: 'listworker',
+    loadChildren: () => import('./pages/Work/listworker/listworker.module').then( m => m.ListworkerPageModule)
   }
-  
+
 ];
 @NgModule({
   imports: [
@@ -22,4 +33,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

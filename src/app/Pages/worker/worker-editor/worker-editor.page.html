@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" size="large" (click)="closeEditor()">
+      <ion-icon name="arrow-back" color="dark"></ion-icon>
+    </ion-button>
+    <ion-title color="dark">Datos empleado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <img style="width: 400px; height: 400px;" src="../../../../assets/imgs/user.jpg">
+      <ion-card-subtitle>Nombre</ion-card-subtitle>
+      <ion-card-title>{{worker.name}}</ion-card-title>
+
+      <ion-card-subtitle>Apellidos</ion-card-subtitle>
+      <ion-card-title>{{worker.surname}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>

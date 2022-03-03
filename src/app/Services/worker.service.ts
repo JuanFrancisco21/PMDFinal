@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Work } from '../Model/work';
 import { Worker } from '../Model/worker';
 
 @Injectable({
@@ -115,6 +116,22 @@ export class WorkerService {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.delete(this.ENDPOINT + workerId, this.header).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Function which instantiates a worker into the database
+   * @param worker the worker to be instantiated
+   * @returns the instantiated worker
+   */
+   public async addWorkertoWork(worker: Worker, work: Work): Promise<Worker> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.post(this.ENDPOINT + 'add/' + worker.id + '/' + work.id, this.header).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);
