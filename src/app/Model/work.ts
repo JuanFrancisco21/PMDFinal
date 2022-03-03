@@ -10,5 +10,6 @@ export interface Work {
         y: Number,
     },
     chief: Worker,
-    workerWork: Array<Workerwork>
+    workerWork: Workerwork[]
+
 }
