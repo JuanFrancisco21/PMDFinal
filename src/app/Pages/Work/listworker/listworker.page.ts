@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Work } from 'src/app/Model/work';
@@ -8,13 +9,13 @@ import { LocalstorageService } from 'src/app/Services/localstorage.service';
 import { WorkerService } from 'src/app/Services/worker.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-listworker',
   templateUrl: './listworker.page.html',
   styleUrls: ['./listworker.page.scss'],
 })
 export class ListworkerPage implements OnInit {
-
 
   workerworkForm: FormGroup | any;
   public datacoming:any;
@@ -40,7 +41,6 @@ export class ListworkerPage implements OnInit {
         }
       }
   }
-
   async ionViewDidEnter() {
   }
 
@@ -62,15 +62,12 @@ export class ListworkerPage implements OnInit {
     this.router.navigate(['/main/tabs/tab1'])
   }
 
-
   async addWorker(worker:Worker){
     this.workerserv.addWorkertoWork(worker, this.work);
     console.log(worker.id + ' ' + this.work.id);
   }
 
   
-  
-
   
 
 }

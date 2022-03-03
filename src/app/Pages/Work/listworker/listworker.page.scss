@@ -1,6 +1,7 @@
 ion-title,ion-toolbar{
     font-size: x-large;
     font-family: 'Times New Roman';
+
     color: black;
     font-weight: bold;
     text-align: center;
@@ -19,6 +20,15 @@ ion-toolbar{
 ion-icon{
     margin-left: 10px;
 }
+ion-item{
+    --background: #ffffff;
+    --color: rgb(105, 105, 105);
+    margin: 10px;
+    border-radius: 6px;
+    border: #252525 solid 1px;
+    border-bottom: none;
+}
+
 ion-select{
     --background: #ffffff;
     --color: rgb(105, 105, 105);

@@ -11,4 +11,5 @@ export interface Work {
     },
     chief: Worker,
     workerWork: Workerwork[]
+
 }
