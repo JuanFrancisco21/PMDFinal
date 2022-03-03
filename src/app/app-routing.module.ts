@@ -21,7 +21,11 @@ const routes: Routes = [
   {
     path: 'worker-editor',
     loadChildren: () => import('./Pages/worker/worker-editor/worker-editor.module').then( m => m.WorkerEditorPageModule)
+  },  {
+    path: 'listworker',
+    loadChildren: () => import('./pages/Work/listworker/listworker.module').then( m => m.ListworkerPageModule)
   }
+
 ];
 @NgModule({
   imports: [

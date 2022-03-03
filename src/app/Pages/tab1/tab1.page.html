@@ -22,7 +22,7 @@
 
     <ion-item-sliding *ngFor="let obra of obras | filtro:textoBuscar;let i=index ">
 
-      <ion-item>
+      <ion-item (click)="goListworker(obra)">
 
         <ion-avatar class="avatar" item-start>
           <img src="../../../assets/imgs/obra.jpg">
