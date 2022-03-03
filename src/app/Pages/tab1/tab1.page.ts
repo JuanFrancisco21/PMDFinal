@@ -6,6 +6,7 @@ import { Work } from 'src/app/Model/work';
 import { AuthService } from 'src/app/Services/auth.service';
 import { NotificationsService } from 'src/app/Services/notifications.service';
 import { WorkService } from 'src/app/Services/work.service';
+import { ListworkerPage } from '../Work/listworker/listworker.page';
 
 @Component({
   selector: 'app-tab1',
@@ -30,13 +31,12 @@ export class Tab1Page {
      * Cargar obras cuando este lista la vista.
      */
   async ionViewDidEnter() {
-    /*this.ws.checkDatabase();*/
     await this.cargaObras();
   }
 
   /**
    * Método para cargar obras de pgAdmin.
-   * @param event para cargar obras
+   * @param event para cargar obras.
    */
    public async cargaObras(event?) {
     if (this.infinite) {
@@ -61,8 +61,8 @@ export class Tab1Page {
   }
 
   /**
-   * Método para borrar una nota.
-   * @param nota Borra nota
+   * Método para desactivar una obra.
+   * @param work a desactivar.
    */
   public async borra(obra: Work) {
     this.notifications.presentAlertConfirm().then((async data => {
@@ -86,28 +86,13 @@ export class Tab1Page {
     this.textoBuscar=event.detail.value;
   }
 
-  /**
-   * Método para cerrar sesión, volviendo al login.
+   /**
+   * Redireccionamiento a la pagina de lectura de una obra.
+   * @param work que se va a enviar a tab3
    */
-  public async logout() {
-    await this.authS.logout();
-    this.router.navigate(['']);
-  }
-
-  /**
-   * Apertura de ventana modal para editar obra.
-   * @param obra a editar
-   * @returns 
-   */
-  async edita(obra: Work) {
-    /*const modal = await this.modalController.create({
-      component: EditPage,
-      componentProps: {
-        'obra': obra
-      }
-    });
-    return await modal.present();*/
-  }
+    public goListworker(work: Work){
+      this.navCtrl.navigateForward(['listworker',{data:JSON.stringify(work)}]);
+    }
 
   /**
    * Redireccionamiento a la pagina de creacion de obras.
@@ -115,4 +100,13 @@ export class Tab1Page {
   public addwork(){
     this.router.navigate(['addwork']);
   }
+  
+  /**
+   * Método para cerrar sesión, volviendo al login.
+   */
+   public async logout() {
+    await this.authS.logout();
+    this.router.navigate(['']);
+  }
+
 }
