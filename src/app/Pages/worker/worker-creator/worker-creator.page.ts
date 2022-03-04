@@ -22,7 +22,9 @@ export class WorkerCreatorPage implements OnInit {
     this.workerForm = this.formBuilder.group({
       name: ["", Validators.required],
       surname: ["", Validators.required],
-      active: [false, Validators.required]
+      email: ["", Validators.required],
+      active: [false, Validators.required],
+      multipartFile: [null]
     });
   }
 
@@ -33,14 +35,23 @@ export class WorkerCreatorPage implements OnInit {
     this.worker = {
       name: this.workerForm.get("name").value,
       surname: this.workerForm.get("surname").value,
+      email: this.workerForm.get("email").value,
       active: this.workerForm.get("active").value,
       picture: "",
       chiefWorkList: Array<Work>(),
       workerWork: Array<Workerwork>()
     }
 
-    console.log(this.worker);
-    await this.workerService.createWorker(this.worker);
+    var formData: any=new FormData();
+    formData.append("worker", new Blob([JSON.stringify(this.worker)],{
+      type:"application/json"
+    }));
+    formData.append("multipartFile", this.workerForm.get('multipartFile').value)
+
+    // console.log(this.worker);
+    await this.workerService.createWorker(formData).then(response =>{
+      console.log(response);
+    });
   }
 
   public async pickPhoto() {
@@ -51,9 +62,18 @@ export class WorkerCreatorPage implements OnInit {
       allowEditing: false
     }).then((result) => {
       this.image = result.dataUrl;
+      console.log(this.image);
     }, (error) => {
       alert(error);
     });
+  }
+
+  uploadFile(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.workerForm.patchValue({
+      multipartFile: file
+    });
+    this.workerForm.get('multipartFile').updateValueAndValidity()
   }
 
   public async closeEditor() {

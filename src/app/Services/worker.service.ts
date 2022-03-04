@@ -79,10 +79,10 @@ export class WorkerService {
    * @param worker the worker to be instantiated
    * @returns the instantiated worker
    */
-  public async createWorker(worker: Worker): Promise<Worker> {
+  public async createWorker(formData: any): Promise<Worker[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.post(this.ENDPOINT, worker).toPromise();
+        let result: Worker[] = await this.http.post(this.ENDPOINT + "foto", formData).toPromise() as Worker[];
         resolve(result);
       } catch (error) {
         reject(error);
