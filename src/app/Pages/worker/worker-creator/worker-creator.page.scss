@@ -4,11 +4,11 @@ ion-title,ion-toolbar{
 	color: white;
 	font-weight: bold;
 	text-align: center;
-	padding-left: 25px;
+	padding-right: 25px;
 }
 
 ion-icon{
-	margin-right: 15px;
+	margin-left: 15px;
 }
 
 ion-item{
@@ -19,6 +19,7 @@ ion-item{
 	border: #252525 solid 1px;
 	border-bottom: none;
 }
+
 ion-select{
 	--background: #ffffff;
 	--color: rgb(105, 105, 105);
@@ -26,11 +27,13 @@ ion-select{
 	border-radius: 6px;
 	border: #252525 solid 1px;
 }
-ion-label{
+
+ion-label:not(#checkboxLabel){
 	margin-left: 5%;
 	margin-right: 20%;
 	font-size: large;
 }
+
 ion-button{
 	font-size: x-large;
 	font-family: 'Times New Roman';
@@ -38,6 +41,7 @@ ion-button{
 	text-align: center;
 	margin: 10px;
 }
+
 div{
 	margin-bottom: 20px;
 }
