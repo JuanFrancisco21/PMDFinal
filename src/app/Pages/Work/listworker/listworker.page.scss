@@ -1,7 +1,6 @@
 ion-title,ion-toolbar{
     font-size: x-large;
     font-family: 'Times New Roman';
-
     color: black;
     font-weight: bold;
     text-align: center;
@@ -20,15 +19,6 @@ ion-toolbar{
 ion-icon{
     margin-left: 10px;
 }
-ion-item{
-    --background: #ffffff;
-    --color: rgb(105, 105, 105);
-    margin: 10px;
-    border-radius: 6px;
-    border: #252525 solid 1px;
-    border-bottom: none;
-}
-
 ion-select{
     --background: #ffffff;
     --color: rgb(105, 105, 105);
@@ -51,3 +41,23 @@ ion-button{
 div{
     margin-bottom: 20px;
 }
+.create{
+    text-align: center;
+    font-family: 'Times New Roman';
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+}
+.datepick{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+    
+}
+.container {
+    height: 100px;
+    position: relative;
+  }
