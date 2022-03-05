@@ -97,7 +97,7 @@ export class Tab1Page {
   /**
    * Redireccionamiento a la pagina de creacion de obras.
    */
-  public addwork(){
+  public goaddwork(){
     this.router.navigate(['addwork']);
   }
   

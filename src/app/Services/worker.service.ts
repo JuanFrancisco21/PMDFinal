@@ -91,6 +91,22 @@ export class WorkerService {
   }
 
   /**
+  * Método que crea Worker en la BD
+  * @param Worker 
+  * @returns el ticket creado
+  */
+     public createTicket(formData: any): Promise<Worker[]> {
+      return new Promise(async (resolve, reject) => {
+        try {
+          let Worker: Worker[] = await this.http.post(this.ENDPOINT, formData,).toPromise() as Worker[];
+          resolve(Worker);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+
+  /**
    * Function which updates a worker in the database
    * @param worker the worker to be instantiated
    * @returns the updated worker
