@@ -13,6 +13,7 @@ import { LocalstorageService } from './Services/localstorage.service';
 export class AppComponent {
   private langsAvailable = ['es', 'en'];
   public subscription: any;
+  public SideMenuHide: boolean = false;
   constructor(private traductor: TranslateService,
     private router: Router,
     private authS: AuthService,
@@ -52,6 +53,7 @@ export class AppComponent {
    * Método para cerrar sesión, volviendo al login.
    */
    public async logout() {
+     this.SideMenuHide=true;
     await this.authS.logout();
     this.router.navigate(['']);
   }
