@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar>
+    <ion-icon name="arrow-back" slot="start" (click)="closeEditor()"></ion-icon>
     <ion-title color="dark">Crear empleado</ion-title>
-    <ion-button slot="end" fill="clear" size="large" (click)="closeEditor()">
-      <ion-icon name="close" color="dark"></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -11,23 +9,44 @@
 
   <form [formGroup]="workerForm" (ngSubmit)="saveWorker()">
 
-    <ion-item>
-      <ion-label>Nombre</ion-label>
-      <ion-input placeholder="Introduzca un nombre" type="text" formControlName="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Apellidos</ion-label>
-      <ion-input placeholder="Introduzca unos apellidos" type="text" formControlName="surname"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Activo</ion-label>
-      <ion-checkbox color="primary" formControlName="active"></ion-checkbox>
-    </ion-item>
-    <ion-button expand="full" color="primary" type="submit" [disabled]="this.workerForm.invalid">Agregar</ion-button>
-
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div>
+            <ion-label>Nombre</ion-label>
+            <ion-item>
+              <ion-input placeholder="Introduzca un nombre" type="text" formControlName="name"></ion-input>
+            </ion-item>
+          </div>
+          <div>
+            <ion-label>Apellidos</ion-label>
+            <ion-item>
+              <ion-input placeholder="Introduzca unos apellidos" type="text" formControlName="surname"></ion-input>
+            </ion-item>
+          </div>
+          <div>
+            <ion-label>Email</ion-label>
+            <ion-item>
+              <ion-input placeholder="Introduzca un email" type="text" formControlName="email"></ion-input>
+            </ion-item>
+          </div>
+          <div>
+            <ion-item>
+              <ion-label id="checkboxLabel">Activo</ion-label>
+              <ion-checkbox color="primary" formControlName="active"></ion-checkbox>
+            </ion-item>
+          </div>
+          <ion-button expand="full" color="primary" type="submit" [disabled]="this.workerForm.invalid">Agregar</ion-button>
+          <div class="form-group">
+            <input type="file" (change)="uploadFile($event)">
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 
   <ion-img style="width: 400px; height: 400px;" *ngIf="this.image" [src]="this.image"></ion-img>
   <ion-button expand="full" color="primary" type="submit" (click)="pickPhoto()">foto</ion-button>
+  
 
 </ion-content>
