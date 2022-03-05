@@ -19,7 +19,7 @@ export class DailylogService {
    public async getAllLogs(): Promise<Dailylog[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.get(this.ENDPOINT, this.header).toPromise();
+        let result: any = await this.http.get(this.ENDPOINT).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);
@@ -107,10 +107,4 @@ export class DailylogService {
     });
   }
 
-  private get header(): any {
-    return {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-    }
-  }
 }
