@@ -4,6 +4,7 @@ import { IonInfiniteScroll, ModalController, NavController } from '@ionic/angula
 import { TranslateService } from '@ngx-translate/core';
 import { Work } from 'src/app/Model/work';
 import { AuthService } from 'src/app/Services/auth.service';
+import { DailylogService } from 'src/app/Services/dailylog.service';
 import { NotificationsService } from 'src/app/Services/notifications.service';
 import { WorkService } from 'src/app/Services/work.service';
 import { ListworkerPage } from '../Work/listworker/listworker.page';
@@ -20,6 +21,7 @@ export class Tab1Page {
   public textoBuscar: string='';
 
   constructor(private ws: WorkService,
+    private DailylogService: DailylogService,
     private translator:TranslateService,
     public modalController: ModalController,
     private notifications: NotificationsService,
@@ -31,6 +33,7 @@ export class Tab1Page {
      * Cargar obras cuando este lista la vista.
      */
   async ionViewDidEnter() {
+    console.log(this.DailylogService.getAllLogs())
     await this.cargaObras();
   }
 

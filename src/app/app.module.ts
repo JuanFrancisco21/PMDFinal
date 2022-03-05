@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './Services/auth.service';
 import { AuthguardService } from './Services/authguard.service';
 import { AddworkPage } from './Pages/Work/addwork/addwork.page';
+import { DailylogService } from './Services/dailylog.service';
 
 export function loadTranslator(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,7 +46,7 @@ export function loadTranslator(http: HttpClient){
       }
     })
           ], 
-  providers: [HttpClient,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, WorkService, WorkService, LocalstorageService, AuthService, AuthguardService],
+  providers: [HttpClient,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, WorkService, WorkService, DailylogService, LocalstorageService, AuthService, AuthguardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

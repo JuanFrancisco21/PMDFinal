@@ -1,6 +1,18 @@
 {
     "/work":{
-        "target":"http://127.0.0.1:8080",
+        "target":"http://dalilylog.herokuapp.com",
+        "changeOrigin":true,
+        "secure":false,
+        "logeLevel":"debug"
+    },
+    "/worker":{
+        "target":"http://dalilylog.herokuapp.com",
+        "changeOrigin":true,
+        "secure":false,
+        "logeLevel":"debug"
+    },
+    "/dailylogs":{
+        "target":"http://dalilylog.herokuapp.com",
         "changeOrigin":true,
         "secure":false,
         "logeLevel":"debug"

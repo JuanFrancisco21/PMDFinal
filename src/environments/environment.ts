@@ -12,7 +12,7 @@ export const environment = {
   },
   apiWork: 'work/',
   apiWorker: 'worker/',
+  apiDailylog: 'dailylogs/',
   apiName: 'name/',
-  apiActive: 'active/',
-  apiDailylog: 'dailylogs/'
+  apiActive: 'active/'
 };

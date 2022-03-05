@@ -18,7 +18,7 @@ export class WorkService {
   public async getAllObras(): Promise<Work[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.get(this.endpoint, this.header).toPromise();
+        let result: any = await this.http.get(this.endpoint).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);
@@ -61,7 +61,7 @@ export class WorkService {
   * @param obra que queremos guardar
   * @returns es void porque no devuelve nada
   */
-   public async createObra(obra: Work): Promise<void> {
+   public async createObra(obra: Work): Promise<Work[]> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.post(this.endpoint, obra).toPromise();
@@ -77,7 +77,7 @@ export class WorkService {
   * @param obra que queremos actualizar
   * @returns
   */
-   public async updateObra(obra: Work): Promise<void> {
+   public async updateObra(obra: Work) {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.put(this.endpoint, obra).toPromise();
@@ -94,7 +94,7 @@ export class WorkService {
   * @param id del trabajador para buscar
   * @returns Obras de un trabajador
   */
-  public getObraByUser(id?: Number): Promise<Work[]> {
+  public getObrasByUser(id?: Number): Promise<Work[]> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.get(this.endpoint + "id_worker/" + id).toPromise();
@@ -110,7 +110,7 @@ export class WorkService {
   * @param id de la obra
   * @returns es void porque no devuelve nada
   */
-   public async deleteObra(id: Number): Promise<void> {
+   public async deleteObra(id: Number){
     return new Promise(async (resolve, reject) => {
       try {
         const result: any = this.http.delete(this.endpoint + id).toPromise();
@@ -121,11 +121,4 @@ export class WorkService {
     });
   }
 
-
-  private get header(): any {
-    return {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-    }
-  }
 }
