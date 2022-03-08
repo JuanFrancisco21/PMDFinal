@@ -1,5 +1,16 @@
 ion-title {
   position: absolute;
+  font-size: x-large;
+  font-family: 'Times New Roman';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.selector{
+  color:rgb(255, 162, 75);
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
