@@ -58,6 +58,21 @@ export class WorkerService {
       }
     });
   }
+  /**
+     * Function which finds a worker in the database based on their email
+     * @param workerEmail the email we will use to search the database
+     * @returns the woker with the matching email
+     */
+  public async getWorkerByEmail(workerEmail: String): Promise<Worker> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + environment.apiEmail + workerEmail, this.header).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 
   /**
    * Function which gathers all workers who's active is the desginated value
@@ -96,16 +111,16 @@ export class WorkerService {
   * @param Worker 
   * @returns el ticket creado
   */
-     public createTicket(formData: any): Promise<Worker[]> {
-      return new Promise(async (resolve, reject) => {
-        try {
-          let Worker: Worker[] = await this.http.post(this.ENDPOINT, formData,).toPromise() as Worker[];
-          resolve(Worker);
-        } catch (error) {
-          reject(error);
-        }
-      });
-    }
+  public createTicket(formData: any): Promise<Worker[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let Worker: Worker[] = await this.http.post(this.ENDPOINT, formData,).toPromise() as Worker[];
+        resolve(Worker);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 
   /**
    * Function which updates a worker in the database
@@ -144,7 +159,7 @@ export class WorkerService {
    * @param worker the worker to be instantiated
    * @returns the instantiated worker
    */
-   public async addWorkertoWork(worker: Worker, work: Work): Promise<Worker> {
+  public async addWorkertoWork(worker: Worker, work: Work): Promise<Worker> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.post(this.ENDPOINT + 'add/' + worker.id + '/' + work.id, this.header).toPromise();

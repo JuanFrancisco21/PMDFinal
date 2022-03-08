@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { MenuController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { Worker } from './Model/worker';
 import { AuthService } from './Services/auth.service';
 import { LocalstorageService } from './Services/localstorage.service';
+import { WorkerService } from './Services/worker.service';
 
 @Component({
   selector: 'app-root',
@@ -13,49 +15,40 @@ import { LocalstorageService } from './Services/localstorage.service';
 export class AppComponent {
   private langsAvailable = ['es', 'en'];
   public subscription: any;
-  public SideMenuHide: boolean = false;
-  constructor(private traductor: TranslateService,
-    private router: Router,
-    private authS: AuthService,
+
+  constructor (private traductor: TranslateService,
     private storage: LocalstorageService,
     private platform: Platform) {
-    this.platform.backButton.subscribeWithPriority(100, () => {
-      navigator['app'].exitApp();
-    });
-
-    (async () => {
-      let lang = await storage.getItem("lang");
-      if (lang == null) {
-        lang = this.traductor.getBrowserLang();
-      } else {
-        lang = lang.lang;
-      }
-      if (this.langsAvailable.indexOf(lang) > -1) {
-        traductor.setDefaultLang(lang)
-      } else {
-        traductor.setDefaultLang("en");
-      }
-    })();
-
-    //detectar el lenguaje del navegador
-    //const lang = window.navigator.language.split("-")[0]
-    const lang = this.traductor.getBrowserLang();
+      this.platform.backButton.subscribeWithPriority(100, () => {
+        navigator['app'].exitApp();
+      });
+      
+      (async () => {
+        let lang = await storage.getItem("lang");
+        
+        if (lang == null) {
+          lang = this.traductor.getBrowserLang();
+        } else {
+          lang = lang.lang;
+        }
+        if (this.langsAvailable.indexOf(lang) > -1) {
+          traductor.setDefaultLang(lang)
+        } else {
+          traductor.setDefaultLang("en");
+        }
+      })();
+      
+      //detectar el lenguaje del navegador
+      //const lang = window.navigator.language.split("-")[0]
+      const lang = this.traductor.getBrowserLang();
     if (this.langsAvailable.indexOf(lang) > -1) {
       traductor.setDefaultLang(lang);
     }
     traductor.setDefaultLang("en");
+
   }
+  
   ionViewDidEnter() {
-
-  }
-
-  /**
-   * Método para cerrar sesión, volviendo al login.
-   */
-   public async logout() {
-     this.SideMenuHide=true;
-    await this.authS.logout();
-    this.router.navigate(['']);
   }
 
   /**
@@ -63,7 +56,6 @@ export class AppComponent {
    * @param event 
    */
   public async cambiaIdioma(event) {
-
     if (event && event.detail && event.detail.checked) {
       await this.storage.setItem('lang', { lang: 'en' });
       this.traductor.use('en');

@@ -5,6 +5,7 @@ export interface Work {
     id?: Number,
     name: String,
     description: String,
+    active: Boolean,
     location: {
         x: Number,
         y: Number,

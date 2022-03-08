@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Dailylog",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

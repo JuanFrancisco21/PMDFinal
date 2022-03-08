@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { LocalstorageService } from './localstorage.service';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { User } from '@codetrix-studio/capacitor-google-auth/dist/esm/definitions';
+import { Worker } from '../Model/worker';
+import { WorkerService } from './worker.service';
 
 
 
@@ -13,9 +15,11 @@ import { User } from '@codetrix-studio/capacitor-google-auth/dist/esm/definition
 })
 export class AuthService {
   public user: any;
+  public trabajador: Worker;
   private isAndroid = false;
 
   constructor(private storage: LocalstorageService,
+    private workerservice: WorkerService,
     private platform: Platform,
     public authf: AngularFireAuth) {
     this.isAndroid = platform.is("android");
@@ -31,26 +35,26 @@ export class AuthService {
   public registroUsuario(userdata: { email: any; password: any; }): Promise<Boolean> {
     return new Promise(async (resolve, reject) => {
       return this.authf.createUserWithEmailAndPassword(userdata.email, userdata.password)
-      .then(async u => {
-        if (u != null && u.user != null) {
-          this.user = {
-            displayName: u.user?.displayName,
-            email: u.user?.email,
-            photoURL: u.user?.photoURL,
-            uid: u.user?.uid
-          };
-          await this.keepSession();
-          resolve(true);
-        } else {
-          reject(false);
-          this.user = null;
-        }
-      })
-      .catch(
-        error => {
-          console.log(error);
-        }
-      );
+        .then(async u => {
+          if (u != null && u.user != null) {
+            this.user = {
+              displayName: u.user?.displayName,
+              email: u.user?.email,
+              photoURL: u.user?.photoURL,
+              uid: u.user?.uid
+            };
+            await this.keepSession();
+            resolve(true);
+          } else {
+            reject(false);
+            this.user = null;
+          }
+        })
+        .catch(
+          error => {
+            console.log(error);
+          }
+        );
     })
   }
 
@@ -89,11 +93,15 @@ export class AuthService {
    * Cargar datos del usuario guardado.
    */
   public async loadSession() {
-    let user = await this.storage.getItem('user');
-    if (user) {
-      user = JSON.parse(user);
-      this.user = user;
+    try {
+      let user = await this.storage.getItem('user');
+      if (user) {
+        user = JSON.parse(user);
+        this.user = user;
+      }
+    } catch (error) {
     }
+
   }
   /**
    * Log de usuario mediante google.

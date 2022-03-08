@@ -97,7 +97,7 @@ export class WorkService {
   public getObrasByUser(id?: Number): Promise<Work[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.get(this.endpoint + "id_worker/" + id).toPromise();
+        let result: any = await this.http.get(this.endpoint + "idworker/" + id).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);

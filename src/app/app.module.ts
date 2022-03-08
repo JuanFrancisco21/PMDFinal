@@ -34,9 +34,9 @@ export function loadTranslator(http: HttpClient){
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    HttpClientModule,
     PipesModule,
     TranslateModule.forRoot({
       loader : {
