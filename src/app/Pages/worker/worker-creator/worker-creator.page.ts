@@ -23,7 +23,6 @@ export class WorkerCreatorPage implements OnInit {
       name: ["", Validators.required],
       surname: ["", Validators.required],
       email: ["", Validators.required],
-      active: [false, Validators.required],
       multipartFile: [null]
     });
   }
@@ -36,7 +35,7 @@ export class WorkerCreatorPage implements OnInit {
       name: this.workerForm.get("name").value,
       surname: this.workerForm.get("surname").value,
       email: this.workerForm.get("email").value,
-      active: this.workerForm.get("active").value,
+      active: true,
       picture: "",
       chiefWorkList: Array<Work>(),
       workerWork: Array<Workerwork>()
@@ -69,11 +68,11 @@ export class WorkerCreatorPage implements OnInit {
   }
 
   uploadFile(event) {
-    const file = (event.target as HTMLInputElement).files[0];
     this.workerForm.patchValue({
-      multipartFile: file
+      multipartFile: (event.target as HTMLInputElement).files[0]
     });
     this.workerForm.get('multipartFile').updateValueAndValidity()
+    console.log(this.workerForm.get('multipartFile').value);
   }
 
   public async closeEditor() {

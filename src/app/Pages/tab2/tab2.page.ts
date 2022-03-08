@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, IonSegment, ModalController } from '@ionic/angular';
 import { Worker } from 'src/app/Model/worker';
 import { NotificationsService } from 'src/app/Services/notifications.service';
 import { WorkerService } from 'src/app/Services/worker.service';
@@ -13,6 +13,7 @@ import { WorkerEditorPage } from '../worker/worker-editor/worker-editor.page';
 })
 export class Tab2Page {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
+  segment: String="active"
 
   public workers: Worker[] = [];
 
@@ -32,7 +33,7 @@ export class Tab2Page {
 
     this.workers = [];
     try {
-      this.workers = await this.workerService.getAllWorkers();
+      this.workers = await this.workerService.getWorkerByActive((this.segment.match("active")) ? true : false);
     } catch (error) {
       console.error(error);
       await this.notification.presentToast("Error cargando empleados", "danger");

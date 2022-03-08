@@ -8,9 +8,18 @@
     </ion-title>
   </ion-toolbar>
 
-  <ion-item>
+  <ion-segment [(ngModel)]="segment" (ionChange)="loadWorkers()">
+    <ion-segment-button value="active">
+      <ion-label>Activos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="nonActive">
+      <ion-label>No activos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- <ion-item>
     <ion-searchbar placeholder="Buscar" animated></ion-searchbar>
-  </ion-item>
+  </ion-item> -->
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -22,7 +31,7 @@
   <ion-list>
 
     <!-- <ion-item-sliding *ngFor="let worker of workers | filtro:textoBuscar;let i=index " >
-    
+   
     </ion-item-sliding> -->
 
     <ion-item *ngFor="let worker of workers" (click)="openEditor(worker)">
