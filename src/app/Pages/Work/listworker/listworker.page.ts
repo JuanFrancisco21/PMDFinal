@@ -9,7 +9,6 @@ import { NotificationsService } from 'src/app/Services/notifications.service';
 import { IonDatetime, IonInfiniteScroll } from '@ionic/angular';
 import { WorkService } from 'src/app/Services/work.service';
 import { DailylogService } from 'src/app/Services/dailylog.service';
-import { format, parseISO } from 'date-fns';
 import { Dailylog } from 'src/app/Model/dailylog';
 
 @Component({
@@ -112,24 +111,24 @@ export class ListworkerPage implements OnInit {
   }
   
 
-  formatDate(value:string) {
+  /*formatDate(value:string) {
     this.date = format(parseISO(value), 'yyyy-MM-dd');
     console.log(this.date);
-  }
+  }*/
 
   resetDate(){
     this.date = '';
   }
 
-  async createDailylog(){
+  /*async createDailylog(){
     if(this.hours==null){
       this.hours=8.0;
     }
     if(this.date.startsWith('')){
-      this.date=format(parseISO(new Date().toISOString()), 'yyyy-MM-dd');
+      //this.date=format(parseISO(new Date().toISOString()), 'yyyy-MM-dd');
     }
     let dailylog : Dailylog={
-      date: this.date,
+      //date: this.date,
       hours:this.hours,
       workerwork:this.wwlist[1]
     }
@@ -139,7 +138,7 @@ export class ListworkerPage implements OnInit {
       console.log(error)
     }
     console.log(dailylog);
-  }
+  }*/
 
   
   
