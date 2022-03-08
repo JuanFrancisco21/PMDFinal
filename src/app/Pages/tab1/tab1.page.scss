@@ -13,6 +13,22 @@ ion-item{
     border-radius: 10px;
     border-bottom: none;
     margin: 10px;
+    animation: popIn 0.2s both ease-in;
+}
+@keyframes popIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.6) translateY(-8px);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+.logo{
+    margin: 8%;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 p{
     color: rgb(70, 70, 70);
@@ -29,6 +45,7 @@ h2{
     zoom: 2;
     margin: 5px;
 }
+
 .work{
     background-color: gray;
     border-radius: 6px;

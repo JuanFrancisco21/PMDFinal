@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInfiniteScroll, ModalController, NavController } from '@ionic/angular';
+import { IonInfiniteScroll, MenuController, ModalController, NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Work } from 'src/app/Model/work';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -8,6 +8,12 @@ import { DailylogService } from 'src/app/Services/dailylog.service';
 import { NotificationsService } from 'src/app/Services/notifications.service';
 import { WorkService } from 'src/app/Services/work.service';
 import { ListworkerPage } from '../Work/listworker/listworker.page';
+import { createAnimation} from '@ionic/core';
+import { WorkerService } from 'src/app/Services/worker.service';
+import { Worker } from 'src/app/Model/worker';
+import { LocalstorageService } from 'src/app/Services/localstorage.service';
+
+
 
 @Component({
   selector: 'app-tab1',
@@ -18,10 +24,11 @@ export class Tab1Page {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
   public obras: Work[] = [];
+  public trabajador: Worker;
   public textoBuscar: string='';
 
-  constructor(private ws: WorkService,
-    private DailylogService: DailylogService,
+  constructor(private workservice: WorkService,
+    private workerservice: WorkerService,
     private translator:TranslateService,
     public modalController: ModalController,
     private notifications: NotificationsService,
@@ -33,7 +40,7 @@ export class Tab1Page {
      * Cargar obras cuando este lista la vista.
      */
   async ionViewDidEnter() {
-    console.log(this.DailylogService.getAllLogs())
+    this.trabajador = await this.workerservice.getWorkerByEmail(this.authS.user.email);
     await this.cargaObras();
   }
 
@@ -50,7 +57,7 @@ export class Tab1Page {
     }
     this.obras = [];
     try {
-      this.obras = await this.ws.getAllObras();
+      this.obras = await this.workservice.getObrasByUser(this.trabajador.id);
     } catch (err) {
       console.error(err);
       await this.notifications.presentToast("Error cargando datos", "danger");
@@ -67,11 +74,14 @@ export class Tab1Page {
    * Método para desactivar una obra.
    * @param work a desactivar.
    */
-  public async borra(obra: Work) {
+  public async desactivar(obra: Work) {
     this.notifications.presentAlertConfirm().then((async data => {
       if (data) {
         await this.notifications.presentLoading();
-        await this.ws.deleteObra(obra.id);
+        //obra.active=false;
+        //await this.workservice.updateObra(obra);
+                await this.workservice.deleteObra(obra.id);
+
         let i = this.obras.indexOf(obra, 0);
         if (i > -1) {
           this.obras.splice(i, 1);
@@ -104,12 +114,4 @@ export class Tab1Page {
     this.router.navigate(['addwork']);
   }
   
-  /**
-   * Método para cerrar sesión, volviendo al login.
-   */
-   public async logout() {
-    await this.authS.logout();
-    this.router.navigate(['']);
-  }
-
 }

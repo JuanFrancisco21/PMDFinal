@@ -62,7 +62,6 @@ export class SignInPage implements OnInit {
         }
         );
     }
-    console.log(this.form.value);
   }
 
   /**
