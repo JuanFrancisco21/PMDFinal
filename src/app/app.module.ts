@@ -20,6 +20,7 @@ import { AuthService } from './Services/auth.service';
 import { AuthguardService } from './Services/authguard.service';
 import { AddworkPage } from './Pages/Work/addwork/addwork.page';
 import { DailylogService } from './Services/dailylog.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { LoglistComponent } from './Modal/loglist/loglist.component';
 
 export function loadTranslator(http: HttpClient){
@@ -45,6 +46,12 @@ export function loadTranslator(http: HttpClient){
         useFactory : (loadTranslator),
         deps: [HttpClient]
       }
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     })
           ], 
   providers: [HttpClient,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, WorkService, WorkService, DailylogService, LocalstorageService, AuthService, AuthguardService],

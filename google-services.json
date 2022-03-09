@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1070518849573",
+    "project_id": "dailyloger-b582f",
+    "storage_bucket": "dailyloger-b582f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070518849573:android:9d502b95f8dd98fbe6efcc",
+        "android_client_info": {
+          "package_name": "com.ajaguilar.Dailylog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070518849573-dml0u9nvq9gh98n6bchttr5mgbg09j1g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ajaguilar.Dailylog",
+            "certificate_hash": "fff2627f1c72a388c75c1244afd1dba068b97030"
+          }
+        },
+        {
+          "client_id": "1070518849573-qh2d0sqbfhb7f3haqu1aqojiuduj100o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5sIhyTWu_mS2R_Bcp_Qa4vh0yMPzCSwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070518849573-qh2d0sqbfhb7f3haqu1aqojiuduj100o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

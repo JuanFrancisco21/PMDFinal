@@ -24,6 +24,8 @@ export class AuthService {
     public authf: AngularFireAuth) {
     this.isAndroid = platform.is("android");
     this.loadSession();
+    if (!this.isAndroid)
+      GoogleAuth.initialize(); //lee la config clientid del meta de index.html
   }
 
 
