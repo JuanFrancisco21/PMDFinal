@@ -7,5 +7,6 @@ export interface Workerwork {
     current:Boolean,
     worker:Worker,
     work:Work,
-    dailyLogList:Array<Dailylog>
+    dailyLogList:Array<Dailylog>,
+    dailylogcheck:boolean
 }

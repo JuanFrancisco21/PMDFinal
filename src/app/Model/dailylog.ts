@@ -2,7 +2,7 @@ import { Workerwork } from "./workerwork";
 
 export interface Dailylog {
     id?:Number,
-    date:Date,
+    date:string,
     hours:Number,
     workerwork:Workerwork;
 }

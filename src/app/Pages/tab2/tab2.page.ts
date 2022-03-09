@@ -13,7 +13,7 @@ import { WorkerEditorPage } from '../worker/worker-editor/worker-editor.page';
 })
 export class Tab2Page {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
-  segment: String="active"
+  segment: String = "active"
 
   public workers: Worker[] = [];
 
@@ -44,6 +44,19 @@ export class Tab2Page {
         await this.notification.dismissLoading();
       }
     }
+  }
+
+  public async changeActive(worker: Worker) {
+    
+        // await this.notification.presentLoading();
+
+        worker.active = (this.segment.match("active")) ? false : true;
+        await this.workerService.updateWorker(worker);
+
+        this.loadWorkers();
+
+        // await this.notification.dismissLoading();
+   
   }
 
   public async openCreator() {

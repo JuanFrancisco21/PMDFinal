@@ -27,19 +27,23 @@
 
   <ion-list>
 
-    <!-- <ion-item-sliding *ngFor="let worker of workers | filtro:textoBuscar;let i=index " >
-   
-    </ion-item-sliding> -->
+    <ion-item-sliding *ngFor="let worker of workers" >
+      <ion-item (click)="openEditor(worker)">
+        <ion-avatar class="avatar" item-start>
+          <img src="../../../assets/imgs/user.jpg">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{worker.name}}</h2>
+          <p>{{worker.surname}}</p>
+        </ion-label>
+      </ion-item>
 
-    <ion-item *ngFor="let worker of workers" (click)="openEditor(worker)">
-      <ion-avatar class="avatar" item-start>
-        <img src="../../../assets/imgs/user.jpg">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{worker.name}}</h2>
-        <p>{{worker.surname}}</p>
-      </ion-label>
-    </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="warning" (click)="changeActive(worker)">
+          <ion-icon name="git-compare" style="zoom:3.0"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
 
   </ion-list>
 

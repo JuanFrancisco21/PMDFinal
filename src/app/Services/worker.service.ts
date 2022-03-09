@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Work } from '../Model/work';
 import { Worker } from '../Model/worker';
+import { Workerwork } from '../Model/workerwork';
 
 @Injectable({
   providedIn: 'root'
@@ -159,7 +160,7 @@ export class WorkerService {
    * @param worker the worker to be instantiated
    * @returns the instantiated worker
    */
-  public async addWorkertoWork(worker: Worker, work: Work): Promise<Worker> {
+   public async addWorkertoWork(worker: Worker, work: Work): Promise<Workerwork> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.post(this.ENDPOINT + 'add/' + worker.id + '/' + work.id, this.header).toPromise();
@@ -169,6 +170,7 @@ export class WorkerService {
       }
     });
   }
+
 
   private get header(): any {
     return {

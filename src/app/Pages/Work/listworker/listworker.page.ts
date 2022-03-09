@@ -6,10 +6,12 @@ import {Worker} from 'src/app/Model/worker'
 import { WorkerService } from 'src/app/Services/worker.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'src/app/Services/notifications.service';
-import { IonDatetime, IonInfiniteScroll } from '@ionic/angular';
+import { IonDatetime, IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { WorkService } from 'src/app/Services/work.service';
 import { DailylogService } from 'src/app/Services/dailylog.service';
+import { format, parseISO } from 'date-fns';
 import { Dailylog } from 'src/app/Model/dailylog';
+import { LoglistComponent } from 'src/app/Modal/loglist/loglist.component';
 
 @Component({
   selector: 'app-listworker',
@@ -23,6 +25,7 @@ export class ListworkerPage implements OnInit {
 
   public date = '';
 
+  public dailylogcheck:boolean;
   public datacoming:any;
   public work:Work;
   public worker:Worker = null;
@@ -37,7 +40,8 @@ export class ListworkerPage implements OnInit {
     private notifications: NotificationsService,
     private workerserv:WorkerService,
     private workserv:WorkService,
-    private dailylogserv:DailylogService) {
+    private dailylogserv:DailylogService,
+    private modalcontroller:ModalController) {
       this.datacoming=this.route.snapshot.params['data'];
       if (this.datacoming) {
         try {
@@ -100,7 +104,8 @@ export class ListworkerPage implements OnInit {
 
   async addWorker(){
     if(this.worker != null){
-      this.workerserv.addWorkertoWork(this.worker, this.work);
+     let workerwork = await this.workerserv.addWorkertoWork(this.worker, this.work);
+     console.log(workerwork.worker);
     }
     console.log(this.worker.id + ' ' + this.work.id);
   }
@@ -111,36 +116,69 @@ export class ListworkerPage implements OnInit {
   }
   
 
-  /*formatDate(value:string) {
+  formatDate(value:string) {
     this.date = format(parseISO(value), 'yyyy-MM-dd');
     console.log(this.date);
-  }*/
+  }
 
   resetDate(){
     this.date = '';
   }
 
-  /*async createDailylog(){
+  async createDailylog(){
     if(this.hours==null){
       this.hours=8.0;
     }
-    if(this.date.startsWith('')){
-      //this.date=format(parseISO(new Date().toISOString()), 'yyyy-MM-dd');
+    if(this.date.length<2){
+      this.date=format(parseISO(new Date().toISOString()), 'yyyy-MM-dd');
     }
+
     let dailylog : Dailylog={
-      //date: this.date,
+      date:this.date,
       hours:this.hours,
-      workerwork:this.wwlist[1]
+      workerwork:null
     }
+
+    
+    for(let ww of this.wwlist){
+        if(ww.dailylogcheck==true){
+          await this.createLog(dailylog, ww.id);
+        }
+    }
+      
+    }
+    
+  
+
+  async createLog(dailylog:Dailylog, workerworkid:Number){
     try{
-      await this.dailylogserv.createLog(dailylog);
+      console.log(await this.dailylogserv.createLog(dailylog, workerworkid));
     }catch(error){
-      console.log(error)
+      console.log(error);
     }
-    console.log(dailylog);
-  }*/
+  }
 
-  
-  
+  clickSettings(workerwork:Workerwork){
+    this.notifications.presentAlertConfirm().then((async data => {
+      if (data) {
+        workerwork.current=false;
+        console.log(this.dailylogserv.updateWorkerWork(workerwork));
+      }
+    }));
+  }
 
+  async showLogs(workerwork:Workerwork){
+    console.log('Aqui si llega');
+      let modal = await this.modalcontroller.create({
+        component:LoglistComponent,
+        componentProps:{
+          'logs':workerwork.dailyLogList
+        }
+      });
+      return modal.present();
+    }
 }
+  
+  
+
+

@@ -21,14 +21,15 @@ import { AuthguardService } from './Services/authguard.service';
 import { AddworkPage } from './Pages/Work/addwork/addwork.page';
 import { DailylogService } from './Services/dailylog.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { LoglistComponent } from './Modal/loglist/loglist.component';
 
 export function loadTranslator(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, LoglistComponent],
+  entryComponents: [LoglistComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(), 

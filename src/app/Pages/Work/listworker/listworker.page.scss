@@ -27,8 +27,6 @@ ion-select{
     border: #252525 solid 1px;
 }
 ion-label{
-    margin-left: 5%;
-    margin-right: 20%;
     font-size: large;
 }
 ion-button{
@@ -37,6 +35,16 @@ ion-button{
     color: black;
     text-align: center;
     margin: 10px;
+}
+ion-check{
+    color:orange;
+    height: 90px;
+    width: 90px;
+    border-radius: 0%;
+}
+.settings{
+    height: 60px;
+    width: 60px;
 }
 div{
     margin-bottom: 20px;

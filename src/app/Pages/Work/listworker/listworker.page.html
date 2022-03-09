@@ -23,8 +23,10 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list >
-    <ion-item *ngFor="let ww of this.wwlist;">
-      <ion-label>{{ww.worker.name}}   {{ww.worker.surname}}</ion-label>
+    <ion-item *ngFor="let ww of this.wwlist;" (click)="showLogs(this.ww)">
+      <ion-label >{{ww.worker.name}}   {{ww.worker.surname}}</ion-label>
+      <ion-item><ion-checkbox [(ngModel)]="ww.dailylogcheck" checked="false"></ion-checkbox></ion-item>
+      <ion-button class="settings" (click)="clickSettings(ww)"><ion-icon name="settings-outline"></ion-icon></ion-button>
     </ion-item>
   </ion-list>
 
@@ -33,7 +35,7 @@
   
 
 <ion-item>
-  <ion-label class="create">Crear un nuevo dailylog</ion-label>
+  <ion-label class="create">Nuevo dailylog</ion-label>
 </ion-item>
   <div class="container">
     <div class="datepick">

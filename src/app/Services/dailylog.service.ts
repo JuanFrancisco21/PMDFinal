@@ -59,15 +59,15 @@ export class DailylogService {
     });
   }
 
-  /**
+ /**
   * Método que usaremos para crear un dailylog
   * @param log dailylog que queremos guardar
   * @returns
   */
-   public async createLog(log: Dailylog): Promise<void> {
+  public async createLog(log: Dailylog, workerWorkid:Number): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.post(this.ENDPOINT, log).toPromise();
+        let result: any = await this.http.post(this.ENDPOINT + 'add/' + workerWorkid, log).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);
