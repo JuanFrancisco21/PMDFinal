@@ -112,7 +112,7 @@ export class WorkerService {
   * @param Worker 
   * @returns el ticket creado
   */
-  public createTicket(formData: any): Promise<Worker[]> {
+  public createWorkerSinFoto(formData: any): Promise<Worker[]> {
     return new Promise(async (resolve, reject) => {
       try {
         let Worker: Worker[] = await this.http.post(this.ENDPOINT, formData,).toPromise() as Worker[];

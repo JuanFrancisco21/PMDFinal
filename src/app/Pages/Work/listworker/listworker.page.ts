@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Work } from 'src/app/Model/work';
 import { Workerwork } from 'src/app/Model/workerwork';
-import {Worker} from 'src/app/Model/worker'
+import { Worker} from 'src/app/Model/worker'
 import { WorkerService } from 'src/app/Services/worker.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'src/app/Services/notifications.service';
@@ -162,7 +162,6 @@ export class ListworkerPage implements OnInit {
     this.notifications.presentAlertConfirm().then((async data => {
       if (data) {
         workerwork.current=false;
-        console.log('Updatear ww aqui');
       }
     }));
   }

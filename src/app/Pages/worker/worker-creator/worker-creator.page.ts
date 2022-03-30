@@ -72,7 +72,7 @@ export class WorkerCreatorPage implements OnInit {
       multipartFile: (event.target as HTMLInputElement).files[0]
     });
     this.workerForm.get('multipartFile').updateValueAndValidity()
-    console.log(this.workerForm.get('multipartFile').value);
+    //console.log(this.workerForm.get('multipartFile').value);
   }
 
   public async closeEditor() {

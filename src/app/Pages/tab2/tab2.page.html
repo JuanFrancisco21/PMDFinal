@@ -30,7 +30,7 @@
     <ion-item-sliding *ngFor="let worker of workers" >
       <ion-item (click)="openEditor(worker)">
         <ion-avatar class="avatar" item-start>
-          <img src="../../../assets/imgs/user.jpg">
+          <img src="{{worker.picture}}">
         </ion-avatar>
         <ion-label>
           <h2>{{worker.name}}</h2>

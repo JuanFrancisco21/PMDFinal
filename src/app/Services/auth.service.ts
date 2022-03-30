@@ -16,7 +16,7 @@ import { WorkerService } from './worker.service';
 export class AuthService {
   public user: any;
   public trabajador: Worker;
-  private isAndroid = false;
+  public isAndroid = false;
 
   constructor(private storage: LocalstorageService,
     private workerservice: WorkerService,

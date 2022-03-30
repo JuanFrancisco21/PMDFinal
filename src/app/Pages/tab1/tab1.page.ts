@@ -36,14 +36,14 @@ export class Tab1Page {
     private authS: AuthService,
     private navCtrl: NavController) { }
 
-    /**
-     * Cargar obras cuando este lista la vista.
-     */
+  /**
+   * Cargar obras cuando este lista la vista.
+   */
   async ionViewDidEnter() {
-    this.trabajador = await this.workerservice.getWorkerByEmail(this.authS.user.email);
+    //this.trabajador = await this.workerservice.getWorkerByEmail(this.authS.user.email);
     await this.cargaObras();
   }
-
+  
   /**
    * Método para cargar obras de pgAdmin.
    * @param event para cargar obras.
@@ -57,7 +57,8 @@ export class Tab1Page {
     }
     this.obras = [];
     try {
-      this.obras = await this.workservice.getObrasByUser(this.trabajador.id);
+      //this.obras = await this.workservice.getObrasByUser(this.trabajador.id);
+      this.obras = await this.workservice.getAllObras();
     } catch (err) {
       console.error(err);
       await this.notifications.presentToast("Error cargando datos", "danger");
@@ -69,6 +70,7 @@ export class Tab1Page {
       }
     }
   }
+
 
   /**
    * Método para desactivar una obra.
