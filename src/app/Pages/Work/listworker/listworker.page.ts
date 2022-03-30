@@ -162,7 +162,6 @@ export class ListworkerPage implements OnInit {
     this.notifications.presentAlertConfirm().then((async data => {
       if (data) {
         workerwork.current=false;
-       // console.log(this.dailylogserv.updateWorkerWork(workerwork));
       }
     }));
   }
