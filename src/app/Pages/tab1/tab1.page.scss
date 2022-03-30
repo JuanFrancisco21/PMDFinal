@@ -4,8 +4,7 @@ ion-title,ion-toolbar{
     --color: rgb(104, 104, 104);
     font-weight: bold;
     text-align: center;
-    padding-right: 25px;
-    padding-top: 8px;
+    padding-right: 25px;    padding-top: 8px;
 
 }
 ion-item{
@@ -26,7 +25,8 @@ ion-item{
     }
   }
 .logo{
-    margin: 8%;
+    margin-left:8%;
+    margin-right: 8%;
     margin-top: 5px;
     margin-bottom: 5px;
 }

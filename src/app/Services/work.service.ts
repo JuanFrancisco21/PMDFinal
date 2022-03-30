@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Work } from '../Model/work';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkService {
-  public endpoint = environment.endpoint + environment.apiWork;
+  public endpoint = environment.endpoint +environment.apiWork; 
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {}
 
   /**
   * Metodo que nos devuelve todas las obras almacenadas en la Base de Datos
