@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-welcome',
@@ -12,14 +14,21 @@ export class WelcomePage implements OnInit {
   slideOpts: any = {};
   slideImages: any[] = [];
 
-  constructor() { }
+  constructor(private authS: AuthService,
+    private router: Router) { }
+
+  ionViewWillEnter() {
+    if (this.authS.isLogged()) {
+      this.router.navigate(['/main/tabs/tab1']);
+    }
+  }
 
   ngOnInit() {
     //Lista de imagenes de fondo
     this.slideImages = [
-      'assets/imgs/1.jpg',
+      'assets/imgs/1.jpg'/*,
       'assets/imgs/2.jpg',
-      'assets/imgs/3.jpg'
+      'assets/imgs/3.jpg'*/
     ];
 
     this.slideOpts = {

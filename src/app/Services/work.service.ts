@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Work } from '../Model/work';
 import { AuthService } from './auth.service';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkService {
-  public endpoint = environment.endpoint +environment.apiWork; 
+  public endpoint = environment.endpoint + environment.apiWork;
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient,
+    public notification: NotificationsService) { }
 
   /**
   * Metodo que nos devuelve todas las obras almacenadas en la Base de Datos
@@ -62,7 +64,7 @@ export class WorkService {
   * @param obra que queremos guardar
   * @returns es void porque no devuelve nada
   */
-   public async createObra(obra: Work): Promise<Work[]> {
+  public async createObra(obra: Work): Promise<Work[]> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.post(this.endpoint, obra).toPromise();
@@ -78,7 +80,7 @@ export class WorkService {
   * @param obra que queremos actualizar
   * @returns
   */
-   public async updateObra(obra: Work) {
+  public async updateObra(obra: Work) {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.put(this.endpoint, obra).toPromise();
@@ -107,11 +109,32 @@ export class WorkService {
   }
 
   /**
+  * Metodo que devuelve las obras de un usuario
+  * @param id del trabajador para buscar
+  * @returns Obras de un trabajador
+  */
+  public getActiveObrasByUser(id?: Number, active?:boolean): Promise<Work[]> {
+    if (id!=null && active!=null) {
+      return new Promise(async (resolve, reject) => {
+        try {
+          let result: any = await this.http.get(this.endpoint + "activeidworker/" + id + "/" + active).toPromise();
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }else{
+      this.notification.presentToast("Id o estado a buscar vacio", "Datos vacios en la busqueda");
+    }
+    
+  }
+
+  /**
   * Metodo que usaremos para borrar una obra por su id
   * @param id de la obra
   * @returns es void porque no devuelve nada
   */
-   public async deleteObra(id: Number){
+  public async deleteObra(id: Number) {
     return new Promise(async (resolve, reject) => {
       try {
         const result: any = this.http.delete(this.endpoint + id).toPromise();

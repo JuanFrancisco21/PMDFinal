@@ -22,7 +22,8 @@ import { LocalstorageService } from 'src/app/Services/localstorage.service';
 })
 export class Tab1Page {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
-
+  public segment: string = "active";
+  
   public obras: Work[] = [];
   public trabajador: Worker;
   public textoBuscar: string='';
@@ -40,8 +41,8 @@ export class Tab1Page {
    * Cargar obras cuando este lista la vista.
    */
   async ionViewDidEnter() {
-    //this.trabajador = await this.workerservice.getWorkerByEmail(this.authS.user.email);
-    await this.cargaObras();
+    this.trabajador = await this.workerservice.getWorkerByEmail(this.authS.user.email);
+    //await this.cargaObras();
   }
   
   /**
@@ -57,8 +58,9 @@ export class Tab1Page {
     }
     this.obras = [];
     try {
+      this.obras = await this.workservice.getActiveObrasByUser(this.trabajador.id, this.segment.match("active") ? true : false);      
       //this.obras = await this.workservice.getObrasByUser(this.trabajador.id);
-      this.obras = await this.workservice.getAllObras();
+      //this.obras = await this.workservice.getAllObras();
     } catch (err) {
       console.error(err);
       await this.notifications.presentToast("Error cargando datos", "danger");

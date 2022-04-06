@@ -4,13 +4,22 @@
       <img src="../../../assets/imgs/Logo.png">
     </div>
   </ion-toolbar>
+  <ion-title >
+    Lista de Obras
+  </ion-title>
+  <ion-segment [(ngModel)]="segment" (ionChange)="loadWorkers()">
+    <ion-segment-button value="active">
+      <ion-label class="selector">Obras Activas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="nonActive">
+      <ion-label class="selector">Obras No activos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 
 <ion-content [fullscreen]="true">
-  <ion-title >
-    Lista de Obras
-  </ion-title>
+
 
   <ion-refresher slot="fixed" (ionRefresh)="cargaObras($event)">
     <ion-refresher-content></ion-refresher-content>
