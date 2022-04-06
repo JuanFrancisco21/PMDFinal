@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.ajaguilar.Dailylog;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -1,57 +1,82 @@
-ion-title,ion-toolbar{
+ion-title,
+ion-toolbar {
     font-size: x-large;
     font-family: 'Times New Roman';
     --color: rgb(104, 104, 104);
     font-weight: bold;
     text-align: center;
-    padding-right: 25px;    padding-top: 8px;
+    padding-right: 25px;
+    padding-top: 8px;
 
 }
-ion-item{
+
+ion-segment {
+    text-align: center;
+    background: #ffffff;
+}
+
+.selector{
+    color:rgb(255, 162, 75);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+
+ion-item {
     --background: rgb(211, 211, 211);
     border-radius: 10px;
     border-bottom: none;
     margin: 10px;
     animation: popIn 0.2s both ease-in;
 }
+
 @keyframes popIn {
     0% {
-      opacity: 0;
-      transform: scale(0.6) translateY(-8px);
+        opacity: 0;
+        transform: scale(0.6) translateY(-8px);
     }
+
     100% {
-      opacity: 1;
-      transform: none;
+        opacity: 1;
+        transform: none;
     }
-  }
-.logo{
-    margin-left:8%;
+}
+
+.logo {
+    margin-left: 8%;
     margin-right: 8%;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-p{
+
+p {
     color: rgb(70, 70, 70);
 }
-h2{
+
+h2 {
     font-family: 'Times New Roman';
     color: #DD7F3D;
     font-weight: bold;
     font-size: x-large;
 }
-.avatar{
+
+.avatar {
     --border-radius: 10px;
-    --color: white;    
+    --color: white;
     zoom: 2;
     margin: 5px;
 }
 
-.work{
+.work {
     background-color: gray;
     border-radius: 6px;
     padding: 1px;
     margin: 3px;
 }
-.addbutton{
+
+.addbutton {
     margin: 5%;
 }
