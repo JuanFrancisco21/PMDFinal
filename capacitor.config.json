@@ -2,5 +2,12 @@
 	"appId": "com.ajaguilar.Dailylog",
 	"appName": "Dailylog",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"plugins": {
+		"GoogleAuth": {
+		  "scopes": ["profile", "email"],
+		  "serverClientId": "1070518849573-qh2d0sqbfhb7f3haqu1aqojiuduj100o.apps.googleusercontent.com",
+		  "forceCodeForRefreshToken": true
+		}
+	  }
 }

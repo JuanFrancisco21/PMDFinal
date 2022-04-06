@@ -4,4 +4,5 @@
     <string name="title_activity_main">Dailylog</string>
     <string name="package_name">com.ajaguilar.Dailylog</string>
     <string name="custom_url_scheme">com.ajaguilar.Dailylog</string>
+    <string name="server_client_id">1070518849573-qh2d0sqbfhb7f3haqu1aqojiuduj100o.apps.googleusercontent.com</string>
 </resources>
