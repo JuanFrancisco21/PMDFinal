@@ -46,6 +46,7 @@ export class AddworkPage implements OnInit {
    */
   onSubmit() {
     this.Work = this.saveWork();
+    delete this.Work.chief.workerWork;
     this.WorkS.createObra(this.Work);
     this.workForm.reset();
     this.goBack();
