@@ -6,7 +6,7 @@ import { Worker} from 'src/app/Model/worker'
 import { WorkerService } from 'src/app/Services/worker.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'src/app/Services/notifications.service';
-import { IonDatetime, IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { IonDatetime, IonInfiniteScroll, ModalController, NavController } from '@ionic/angular';
 import { WorkService } from 'src/app/Services/work.service';
 import { DailylogService } from 'src/app/Services/dailylog.service';
 import { format, parseISO } from 'date-fns';
@@ -33,6 +33,8 @@ export class ListworkerPage implements OnInit {
   public workers:Worker[];
   public ww:Workerwork;
   public hours:number;
+  public addingLog: boolean = false;
+  public addingWorker: boolean = false;
 
   constructor(
     private router:Router,
@@ -41,7 +43,8 @@ export class ListworkerPage implements OnInit {
     private workerserv:WorkerService,
     private workserv:WorkService,
     private dailylogserv:DailylogService,
-    private modalcontroller:ModalController) {
+    private modalcontroller:ModalController,
+    private navCtrl: NavController) {
       this.datacoming=this.route.snapshot.params['data'];
       if (this.datacoming) {
         try {
@@ -61,9 +64,10 @@ export class ListworkerPage implements OnInit {
 
 
   async ngOnInit() {
-    console.log(this.work);
+    console.log(this.addingLog);
     this.wwlist=this.work.workerWork;
     this.workers = await this.workerserv.getAllWorkers();
+    await this.cargaWorkers();
     
   }
 
@@ -101,7 +105,6 @@ export class ListworkerPage implements OnInit {
     }
   }
 
-
   async addWorker(){
     if(this.worker != null){
      let workerwork = await this.workerserv.addWorkertoWork(this.worker, this.work);
@@ -114,6 +117,8 @@ export class ListworkerPage implements OnInit {
     console.log(worker);
     this.worker = worker;
   }
+
+
   
 
   formatDate(value:string) {
@@ -148,13 +153,28 @@ export class ListworkerPage implements OnInit {
       
     }
     
-  
+  onClickAddLog(){
+    if(!this.addingLog){
+      this.addingLog = true;
+    }else{
+      this.addingLog = false;
+    }
+  }
 
   async createLog(dailylog:Dailylog, workerworkid:Number){
     try{
       console.log(await this.dailylogserv.createLog(dailylog, workerworkid));
     }catch(error){
       console.log(error);
+    }
+    this.addingLog = false;
+  }
+
+  onClickAddWorker(){
+    if(this.addingWorker){
+      this.addingWorker = false;
+    }else{
+      this.addingWorker = true;
     }
   }
 
@@ -167,7 +187,6 @@ export class ListworkerPage implements OnInit {
   }
 
   async showLogs(workerwork:Workerwork){
-    console.log('Aqui si llega');
       let modal = await this.modalcontroller.create({
         component:LoglistComponent,
         componentProps:{
