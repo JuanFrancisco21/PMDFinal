@@ -15,7 +15,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list >
-    <ion-item *ngFor="let ww of this.wwlist;" >
+    <ion-item *ngFor="let ww of this.wwlist;" (click)="showLogs(ww)">
       <ion-avatar class="avatar" item-start>
         <img src="{{ww.worker.picture}}">
       </ion-avatar>
