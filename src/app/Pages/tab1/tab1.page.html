@@ -7,7 +7,7 @@
   <ion-title >
     Lista de Obras
   </ion-title>
-  <ion-segment [(ngModel)]="segment" (ionChange)="loadWorkers()">
+  <ion-segment [(ngModel)]="segment" (ionChange)="loadworks()">
     <ion-segment-button value="active">
       <ion-label class="selector">Obras Activas</ion-label>
     </ion-segment-button>
@@ -21,27 +21,28 @@
 <ion-content [fullscreen]="true">
 
 
-  <ion-refresher slot="fixed" (ionRefresh)="cargaObras($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="loadworks($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  
   <ion-list lines="none">
 
-    <ion-item-sliding class="item" *ngFor="let obra of obras | filtro:textoBuscar;let i=index ">
+    <ion-item-sliding class="item" *ngFor="let work of works">
 
-      <ion-item (click)="goListworker(obra)">
+      <ion-item (click)="goListworker(work)">
 
         <ion-avatar class="avatar" item-start>
           <img src="../../../assets/imgs/obra.jpg">
         </ion-avatar>
         <ion-label>
-          <h2>{{obra.name}}</h2>
-          <p>{{obra.description}}</p>
+          <h2>{{work.name}}</h2>
+          <p>{{work.description}}</p>
         </ion-label>
         <ion-icon color="primary" name="arrow-forward-outline"></ion-icon>
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option color="danger" expandable (click)="desactivar(obra)">
+        <ion-item-option color="danger" expandable (click)="changeActive(work)">
           <ion-icon name="remove-circle" style="zoom:3.0"></ion-icon>
         </ion-item-option>
       </ion-item-options>

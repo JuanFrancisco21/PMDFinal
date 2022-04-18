@@ -8,7 +8,7 @@ import { DailylogService } from 'src/app/Services/dailylog.service';
 import { NotificationsService } from 'src/app/Services/notifications.service';
 import { WorkService } from 'src/app/Services/work.service';
 import { ListworkerPage } from '../Work/listworker/listworker.page';
-import { createAnimation} from '@ionic/core';
+import { createAnimation } from '@ionic/core';
 import { WorkerService } from 'src/app/Services/worker.service';
 import { Worker } from 'src/app/Model/worker';
 import { LocalstorageService } from 'src/app/Services/localstorage.service';
@@ -22,15 +22,15 @@ import { LocalstorageService } from 'src/app/Services/localstorage.service';
 })
 export class Tab1Page {
   @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
-  public segment: string = "active";
-  
-  public obras: Work[] = [];
-  public trabajador: Worker;
-  public textoBuscar: string='';
+  segment: string = "active";
+
+  public works: Work[] = [];
+  public worker: Worker;
+  public textoBuscar: string = '';
 
   constructor(private workservice: WorkService,
     private workerservice: WorkerService,
-    private translator:TranslateService,
+    private translator: TranslateService,
     public modalController: ModalController,
     private notifications: NotificationsService,
     private router: Router,
@@ -41,24 +41,24 @@ export class Tab1Page {
    * Cargar obras cuando este lista la vista.
    */
   async ionViewDidEnter() {
-    this.trabajador = await this.workerservice.getWorkerByEmail(this.authS.user.email);
-    //await this.cargaObras();
+    this.worker = await this.workerservice.getWorkerByEmail(this.authS.user.email);
+    await this.loadworks();
   }
-  
+
   /**
    * Método para cargar obras de pgAdmin.
    * @param event para cargar obras.
    */
-   public async cargaObras(event?) {
+  public async loadworks(event?) {
     if (this.infinite) {
       this.infinite.disabled = false;
     }
     if (!event) {
       await this.notifications.presentLoading();
     }
-    this.obras = [];
+    this.works = [];
     try {
-      this.obras = await this.workservice.getActiveObrasByUser(this.trabajador.id, this.segment.match("active") ? true : false);      
+      this.works = await this.workservice.getActiveObrasByUser(this.worker.id, this.segment.match("active") ? true : false);
       //this.obras = await this.workservice.getObrasByUser(this.trabajador.id);
       //this.obras = await this.workservice.getAllObras();
     } catch (err) {
@@ -72,50 +72,39 @@ export class Tab1Page {
       }
     }
   }
+  public async changeActive(work: Work) {
+    // await this.notification.presentLoading();
 
+    work.active = (this.segment.match("active")) ? false : true;
+    await this.workservice.updateObra(work);
 
-  /**
-   * Método para desactivar una obra.
-   * @param work a desactivar.
-   */
-  public async desactivar(obra: Work) {
-    this.notifications.presentAlertConfirm().then((async data => {
-      if (data) {
-        await this.notifications.presentLoading();
-        //obra.active=false;
-        //await this.workservice.updateObra(obra);
-                await this.workservice.deleteObra(obra.id);
+    this.loadworks();
 
-        let i = this.obras.indexOf(obra, 0);
-        if (i > -1) {
-          this.obras.splice(i, 1);
-        }
-        await this.notifications.dismissLoading();
-      }
-    }))
+    // await this.notification.dismissLoading();
+
   }
 
   /**
    * Método para busqueda de obras
    * @param event escribir en el search bar
    */
-   public async onInput(event) {
-    this.textoBuscar=event.detail.value;
+  public async onInput(event) {
+    this.textoBuscar = event.detail.value;
   }
 
-   /**
-   * Redireccionamiento a la pagina de lectura de una obra.
-   * @param work que se va a enviar a tab3
-   */
-    public goListworker(work: Work){
-      this.navCtrl.navigateForward(['listworker',{data:JSON.stringify(work)}]);
-    }
+  /**
+  * Redireccionamiento a la pagina de lectura de una obra.
+  * @param work que se va a enviar a tab3
+  */
+  public goListworker(work: Work) {
+    this.navCtrl.navigateForward(['listworker', { data: JSON.stringify(work) }]);
+  }
 
   /**
    * Redireccionamiento a la pagina de creacion de obras.
    */
-  public goaddwork(){
+  public goaddwork() {
     this.router.navigate(['addwork']);
   }
-  
+
 }
