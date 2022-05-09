@@ -15,7 +15,7 @@ import { WorkerService } from './worker.service';
 })
 export class AuthService {
   public user: any;
-  public trabajador: Worker;
+  public worker: Worker;
   public isAndroid = false;
 
   constructor(private storage: LocalstorageService,
@@ -120,10 +120,32 @@ export class AuthService {
     this.user = null;
   }
   /**
+   * Cierre de sesión del usuario como borrado de sus datos para acceso rápido.
+   */
+   public async deleteWorker() {
+    await this.storage.removeItem('worker');
+    this.worker = null;
+  }
+  /**
    * Guardar un usuario en un almacen de datos.
    */
   public async keepSession() {
     await this.storage.setItem('user', JSON.stringify(this.user));
+  }
+
+  /**
+   * Guardar un usuario en un almacen de datos.
+   */
+   public async keepWorker() {
+    await this.storage.setItem('worker', JSON.stringify(this.worker));
+  }
+
+  /**
+   * Método para obtener trabajador guardado.
+   * @returns worker.
+   */
+   public getWorker(): Worker {
+    return this.worker;
   }
 
   /**

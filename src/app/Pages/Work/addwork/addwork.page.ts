@@ -5,6 +5,8 @@ import { Work } from 'src/app/Model/work';
 import { Worker } from 'src/app/Model/worker';
 import { WorkService } from 'src/app/Services/work.service';
 import { WorkerService } from 'src/app/Services/worker.service';
+import { Tab1PageModule } from '../../tab1/tab1.module';
+import { Tab1Page } from '../../tab1/tab1.page';
 
 @Component({
   selector: 'app-addwork',
@@ -47,7 +49,7 @@ export class AddworkPage implements OnInit {
   onSubmit() {
     this.Work = this.saveWork();
     delete this.Work.chief.workerWork;
-    this.WorkS.createObra(this.Work);
+    this.WorkS.createWork(this.Work);
     this.workForm.reset();
     this.goBack();
   }
