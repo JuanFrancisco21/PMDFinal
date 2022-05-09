@@ -30,9 +30,9 @@ ion-title {
 
 // ------------------------------------------------
 
-$purple-gradient: linear-gradient(45deg, rgb(255, 255, 255) 0%, rgba(172, 25, 102, 1) 100%);
-$purple-gradient: linear-gradient(to bottom right, #c90a6d, #ff48a0);
-$purple-gradient2: linear-gradient(to bottom right, #270ac9, #1b003d);
+$purple-gradient: linear-gradient(45deg, rgb(255, 255, 255) 0%, rgb(255, 125, 81) 100%);
+$purple-gradient: linear-gradient(to bottom right, #c03101, #ff7D51);
+$purple-gradient2: linear-gradient(to bottom right, #9e0000, #ff0000);
 $blue1-gradient: linear-gradient(to bottom right, #5e5aec, #3f9efc);
 $blue2-gradient: linear-gradient(to bottom right, #6452e9, #639ff9);
 $shadow: 0 13px 26px rgba(rgb(255, 255, 255), 0.2), 0 3px 6px rgba(rgb(255, 255, 255), 0.2);
@@ -211,6 +211,7 @@ $shadow: 0 13px 26px rgba(rgb(255, 255, 255), 0.2), 0 3px 6px rgba(rgb(255, 255,
             display: block;
             cursor: pointer;
             font-weight: 300;
+            margin-bottom: 10px;
             margin-left: auto;
             margin-right: auto;
             border-radius: 70px;
