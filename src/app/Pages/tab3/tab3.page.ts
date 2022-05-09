@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonToggle } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,7 +22,7 @@ export class Tab3Page {
 
   constructor(public alertController: AlertController,
     private workerService: WorkerService,
-    private workservice: WorkService, 
+    private workservice: WorkService,
     private authS: AuthService,
     private router: Router,
     private notificatios: NotificationsService) {
@@ -37,8 +37,10 @@ export class Tab3Page {
     this.notificatios.dismissLoading();
   }
 
-  
-
+  public async closeSesion() {
+    await this.authS.logout();
+    this.router.navigate(['']);
+  }
 
   public goWorkList() {
     this.router.navigate(['/main/tabs/tab1']);
