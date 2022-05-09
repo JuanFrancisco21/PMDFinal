@@ -91,7 +91,7 @@ export class ListworkerPage implements OnInit {
     }
     this.wwlist = [];
     try {
-      this.work = await this.workserv.getObra(this.work.id);
+      this.work = await this.workserv.getWorkById(this.work.id);
       this.wwlist = this.work.workerWork;
     } catch (err) {
       console.error(err);

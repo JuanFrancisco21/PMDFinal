@@ -18,7 +18,7 @@ export class WorkService {
   * Metodo que nos devuelve todas las obras almacenadas en la Base de Datos
   * @returns lista de todas las obras.
   */
-  public async getAllObras(): Promise<Work[]> {
+  public async getAllWorks(): Promise<Work[]> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.get(this.endpoint).toPromise();
@@ -33,7 +33,7 @@ export class WorkService {
   * @param id de la obra
   * @returns la obra con el id dado
   */
-  public async getObra(id): Promise<Work> {
+  public async getWorkById(id): Promise<Work> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.get(this.endpoint + "/" + id).toPromise();
@@ -48,7 +48,7 @@ export class WorkService {
   * @param nombre 
   * @returns obra
   */
-  public getObraByName(nombre?: String): Promise<Work> {
+  public getWorkByName(nombre?: String): Promise<Work> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.get(this.endpoint + "/name/" + nombre).toPromise();
@@ -61,13 +61,13 @@ export class WorkService {
 
   /**
   * Método que usaremos para crear una obra
-  * @param obra que queremos guardar
+  * @param work que queremos guardar
   * @returns es void porque no devuelve nada
   */
-  public async createObra(obra: Work): Promise<Work[]> {
+  public async createWork(work: Work): Promise<Work[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.post(this.endpoint, obra).toPromise();
+        let result: any = await this.http.post(this.endpoint, work).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);
@@ -77,13 +77,13 @@ export class WorkService {
 
   /**
   * Método que usaremos para actualizar una obra
-  * @param obra que queremos actualizar
+  * @param work que queremos actualizar
   * @returns
   */
-  public async updateObra(obra: Work) {
+  public async updateWork(work: Work) {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.put(this.endpoint, obra).toPromise();
+        let result: any = await this.http.put(this.endpoint, work).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);
@@ -97,7 +97,7 @@ export class WorkService {
   * @param id del trabajador para buscar
   * @returns Obras de un trabajador
   */
-  public getObrasByUser(id?: Number): Promise<Work[]> {
+  public getWorkByUser(id?: Number): Promise<Work[]> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.get(this.endpoint + "idworker/" + id).toPromise();
@@ -113,7 +113,7 @@ export class WorkService {
   * @param id del trabajador para buscar
   * @returns Obras de un trabajador
   */
-  public getActiveObrasByUser(id?: Number, active?:boolean): Promise<Work[]> {
+  public getActiveWorkByUser(id?: Number, active?:boolean): Promise<Work[]> {
     if (id!=null && active!=null) {
       return new Promise(async (resolve, reject) => {
         try {
@@ -134,7 +134,7 @@ export class WorkService {
   * @param id de la obra
   * @returns es void porque no devuelve nada
   */
-  public async deleteObra(id: Number) {
+  public async deleteWork(id: Number) {
     return new Promise(async (resolve, reject) => {
       try {
         const result: any = this.http.delete(this.endpoint + id).toPromise();

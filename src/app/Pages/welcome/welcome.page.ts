@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import { AuthService } from 'src/app/Services/auth.service';
+import { WorkerService } from 'src/app/Services/worker.service';
 
 @Component({
   selector: 'app-welcome',
@@ -93,7 +94,6 @@ export class WelcomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log('ionViewDidEnter WelcomePage');
     this.slides.slideTo(0);
     this.slides.startAutoplay();
   }

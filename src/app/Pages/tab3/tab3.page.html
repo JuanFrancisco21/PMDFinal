@@ -1,17 +1,49 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <div class="logo">
-      <img src="../../../assets/imgs/Logo.png">
-    </div>
+    <ion-title class="ion-text-center">
+      Ajustes del Perfil
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <img src="http://drive.google.com/uc?export=view&id=1PJrgfuAjC6BO45ysfHqa_DtDGenfTvEl">
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="body">
+    <input id="slider" class="customSlider" type="checkbox" checked>
+
+    <div class="wrapper">
+      <div class="top-icons">
+        <i class="fas fa-long-arrow-alt-left"></i>
+        <i class="fas fa-ellipsis-v"></i>
+        <i class="far fa-heart"></i>
+      </div>
+
+      <div class="profile">
+        <img src="{{this.user.picture}}" class="thumbnail">
+        <h3 class="name">{{this.user.name}} {{this.user.surname}}</h3>
+        <p class="description">{{this.user.email}}</p>
+        <button type="button" class="btn" (click)="goWorkList()">Ver Obras</button>
+      </div>
+
+      <div class="social-icons">
+        <div class="icon">
+          <ion-icon name="home-outline"></ion-icon>
+          <h4>{{this.nWork}}</h4>
+          <p>Obras Creadas</p>
+        </div>
+
+        <div class="icon">
+          <ion-icon name="people-outline"></ion-icon>
+          <h4>{{this.nWorkers}}</h4>
+          <p>Obreros</p>
+        </div>
+
+        <div class="icon">
+          <ion-icon name="archive-outline"></ion-icon>
+          <h4>{{this.nWorkDeleted}}</h4>
+          <p>Obras Desactivada</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
