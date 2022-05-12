@@ -4,14 +4,13 @@ import { Work } from 'src/app/Model/work';
 import { Workerwork } from 'src/app/Model/workerwork';
 import { Worker} from 'src/app/Model/worker'
 import { WorkerService } from 'src/app/Services/worker.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'src/app/Services/notifications.service';
-import { IonDatetime, IonInfiniteScroll, ModalController, NavController } from '@ionic/angular';
+import { ActionSheetController, IonDatetime, IonInfiniteScroll, ModalController, NavController } from '@ionic/angular';
 import { WorkService } from 'src/app/Services/work.service';
 import { DailylogService } from 'src/app/Services/dailylog.service';
-import { format, parseISO } from 'date-fns';
 import { Dailylog } from 'src/app/Model/dailylog';
 import { LoglistComponent } from 'src/app/Modal/loglist/loglist.component';
+import { CreateLogModalComponent } from 'src/app/Modal/create-log-modal/create-log-modal.component';
 
 @Component({
   selector: 'app-listworker',
@@ -34,7 +33,10 @@ export class ListworkerPage implements OnInit {
   public ww:Workerwork;
   public hours:number;
   public addingLog: boolean = false;
-  public addingWorker: boolean = false;
+  listWorkersToAdd: Workerwork[] = [];
+  enableButton: boolean = false;
+
+  buttons: any[] = [];
 
   constructor(
     private router:Router,
@@ -44,7 +46,8 @@ export class ListworkerPage implements OnInit {
     private workserv:WorkService,
     private dailylogserv:DailylogService,
     private modalcontroller:ModalController,
-    private navCtrl: NavController) {
+    private navCtrl: NavController,
+    private actionSheet: ActionSheetController) {
       this.datacoming=this.route.snapshot.params['data'];
       if (this.datacoming) {
         try {
@@ -67,6 +70,17 @@ export class ListworkerPage implements OnInit {
     console.log(this.addingLog);
     this.wwlist=this.work.workerWork;
     this.workers = await this.workerserv.getAllWorkers();
+    for(let index of this.workers){
+      this.buttons.push({
+        text: index.name,
+        icon: 'add',
+        role: 'add',
+        handler: () => {
+          this.addWorker(index);
+        }
+      })
+
+    }
     await this.cargaWorkers();
     
   }
@@ -105,53 +119,20 @@ export class ListworkerPage implements OnInit {
     }
   }
 
-  async addWorker(){
-    if(this.worker != null){
-     let workerwork = await this.workerserv.addWorkertoWork(this.worker, this.work);
-     console.log(workerwork.worker);
+  async addWorker(worker: Worker){
+    if(worker != null){
+     let workerwork = await this.workerserv.addWorkertoWork(worker, this.work).then(response => {
+       this.notifications.presentToast(('Trabajador ' + worker.name + ' añadido a la obra ' + this.work.name), 'success');
+     }).catch(error => {
+       this.notifications.presentToast('Error al añadir trabajador, asegúrese de que ese trabajador no esté ya añadido a la obra', 'danger');
+     });
     }
-    console.log(this.worker.id + ' ' + this.work.id);
   }
 
   getValue(worker:Worker) : void{
     console.log(worker);
     this.worker = worker;
   }
-
-
-  
-
-  formatDate(value:string) {
-    this.date = format(parseISO(value), 'yyyy-MM-dd');
-    console.log(this.date);
-  }
-
-  resetDate(){
-    this.date = '';
-  }
-
-  async createDailylog(){
-    if(this.hours==null){
-      this.hours=8.0;
-    }
-    if(this.date.length<2){
-      this.date=format(parseISO(new Date().toISOString()), 'yyyy-MM-dd');
-    }
-
-    let dailylog : Dailylog={
-      date:this.date,
-      hours:this.hours,
-      workerwork:null
-    }
-
-    
-    for(let ww of this.wwlist){
-        if(ww.dailylogcheck==true){
-          await this.createLog(dailylog, ww.id);
-        }
-    }
-      
-    }
     
   onClickAddLog(){
     if(!this.addingLog){
@@ -170,14 +151,6 @@ export class ListworkerPage implements OnInit {
     this.addingLog = false;
   }
 
-  onClickAddWorker(){
-    if(this.addingWorker){
-      this.addingWorker = false;
-    }else{
-      this.addingWorker = true;
-    }
-  }
-
   clickSettings(workerwork:Workerwork){
     this.notifications.presentAlertConfirm().then((async data => {
       if (data) {
@@ -194,6 +167,38 @@ export class ListworkerPage implements OnInit {
         }
       });
       return modal.present();
+    }
+
+    async showLogCreate(){
+      for(let index of this.wwlist){
+        if(index.dailylogcheck){
+          this.listWorkersToAdd.push(index);
+        }
+      }
+      console.log(this.listWorkersToAdd);
+      let modal = await this.modalcontroller.create({
+        component:CreateLogModalComponent,
+        componentProps:{
+          'logsToDo': this.listWorkersToAdd,
+          'work': this.work
+        }
+      });
+      return modal.present();
+    }
+
+    
+
+    async showActionSheet(){
+      const actionSheet = await this.actionSheet.create({
+        header: 'Albums',
+        cssClass: 'my-custom-class',
+        buttons: this.buttons
+      });
+      await actionSheet.present();
+  
+      const { role, data } = await actionSheet.onDidDismiss();
+      console.log('onDidDismiss resolved with role and data', role, data);
+    
     }
 }
   
