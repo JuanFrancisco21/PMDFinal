@@ -21,13 +21,15 @@ import { AuthguardService } from './Services/authguard.service';
 import { AddworkPage } from './Pages/Work/addwork/addwork.page';
 import { DailylogService } from './Services/dailylog.service';
 import { LoglistComponent } from './Modal/loglist/loglist.component';
+import { CommonModule } from '@angular/common';
+import { CreateLogModalComponent } from './Modal/create-log-modal/create-log-modal.component';
 
 export function loadTranslator(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, LoglistComponent],
+  declarations: [AppComponent, LoglistComponent, CreateLogModalComponent  ],
   entryComponents: [LoglistComponent],
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ export function loadTranslator(http: HttpClient){
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    CommonModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     HttpClientModule,
