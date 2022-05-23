@@ -6,6 +6,7 @@ import { Work } from 'src/app/Model/work';
 import { Worker } from 'src/app/Model/worker';
 import { Workerwork } from 'src/app/Model/workerwork';
 import { WorkerService } from 'src/app/Services/worker.service';
+import { Tab2Page } from '../../tab2/tab2.page';
 
 @Component({
   selector: 'app-worker-creator',
@@ -49,8 +50,9 @@ export class WorkerCreatorPage implements OnInit {
 
     // console.log(this.worker);
     await this.workerService.createWorker(formData).then(response =>{
-      console.log(response);
+      this.closeEditor();
     });
+    
   }
 
   public async pickPhoto() {

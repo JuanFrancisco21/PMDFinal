@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, IonSegment, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Worker } from 'src/app/Model/worker';
 import { NotificationsService } from 'src/app/Services/notifications.service';
 import { WorkerService } from 'src/app/Services/worker.service';
@@ -63,7 +63,11 @@ export class Tab2Page {
     const modal = await this.modalController.create({
       component: WorkerCreatorPage
     });
-    return await modal.present();
+    await modal.present()
+    modal.onDidDismiss().then(async () => {
+      await this.loadWorkers();
+    });
+    return ;
   }
 
   public async openEditor(worker: Worker) {

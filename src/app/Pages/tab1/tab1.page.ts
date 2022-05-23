@@ -12,6 +12,7 @@ import { createAnimation} from '@ionic/core';
 import { WorkerService } from 'src/app/Services/worker.service';
 import { Worker } from 'src/app/Model/worker';
 import { LocalstorageService } from 'src/app/Services/localstorage.service';
+import { AddworkPage } from '../Work/addwork/addwork.page';
 
 
 
@@ -49,11 +50,12 @@ export class Tab1Page {
         if (res.id > 0) {
           this.authS.worker = res;
           this.authS.keepWorker();
+          this.loadworks();
         }
       }).catch(err => {
         console.log(err);
       })
-    await this.loadworks();
+    
   }
   
     /**
@@ -118,8 +120,16 @@ export class Tab1Page {
   /**
    * Redireccionamiento a la pagina de creacion de obras.
    */
-  public goaddwork(){
-    this.router.navigate(['addwork']);
+  public async addwork(){
+    const modal = await this.modalController.create({
+      component: AddworkPage
+    });
+    await modal.present()
+    modal.onDidDismiss().then(async () => {
+      await this.loadworks();
+    });
+    return ;
+    //this.router.navigate(['addwork']);
   }
   
 }

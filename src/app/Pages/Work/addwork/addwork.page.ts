@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Work } from 'src/app/Model/work';
 import { Worker } from 'src/app/Model/worker';
 import { WorkService } from 'src/app/Services/work.service';
@@ -18,7 +19,7 @@ export class AddworkPage implements OnInit {
   Work: Work | any;
   workers: any[] = [];
 
-  constructor(private fb: FormBuilder,
+  constructor(private modalController: ModalController,private fb: FormBuilder,
     private WorkerS: WorkerService,
     private WorkS: WorkService,
     private router: Router) {
@@ -51,7 +52,7 @@ export class AddworkPage implements OnInit {
     delete this.Work.chief.workerWork;
     this.WorkS.createWork(this.Work);
     this.workForm.reset();
-    this.goBack();
+    this.modalController.dismiss();
   }
 
   /**
@@ -66,13 +67,5 @@ export class AddworkPage implements OnInit {
     };
     return saveWork;
   }
-
-  /**
-   * Método para cambiar de vista a la principal
-   */
-  goBack() {
-    this.router.navigate(['/main/tabs/tab1'])
-  }
-
 
 }
