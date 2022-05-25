@@ -1,7 +1,6 @@
 export const environment = {
   production: false,
-  endpoint: 'http://localhost:8080/',
-  //endpoint: 'https://dalilylog.herokuapp.com/',
+  endpoint: 'https://dalilylog.herokuapp.com/',
   firebaseConfig: {
     apiKey: "AIzaSyDXzB5zXuGbcal9Dr_2KVPtDArVEqTfz78",
     authDomain: "dailyloger-b582f.firebaseapp.com",

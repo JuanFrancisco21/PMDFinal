@@ -168,6 +168,7 @@ export class ListworkerPage implements OnInit {
 
   async showLogs(workerwork:Workerwork){
     console.log(workerwork);
+    console.log(this.dailylogserv.getLogsByWorker(workerwork.worker.id))
       let modal = await this.modalcontroller.create({
         component:LoglistComponent,
         componentProps:{
