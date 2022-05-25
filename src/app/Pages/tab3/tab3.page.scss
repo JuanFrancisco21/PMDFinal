@@ -30,7 +30,7 @@ ion-title {
 
 // ------------------------------------------------
 
-$purple-gradient: linear-gradient(45deg, rgb(255, 255, 255) 0%, rgb(255, 125, 81) 100%);
+$orange-gradient: linear-gradient(45deg, rgb(255, 255, 255) 0%, rgb(255, 125, 81) 100%);
 $purple-gradient: linear-gradient(to bottom right, #c03101, #ff7D51);
 $purple-gradient2: linear-gradient(to bottom right, #9e0000, #ff0000);
 $blue1-gradient: linear-gradient(to bottom right, #5e5aec, #3f9efc);
@@ -94,12 +94,14 @@ $shadow: 0 13px 26px rgba(rgb(255, 255, 255), 0.2), 0 3px 6px rgba(rgb(255, 255,
 
         .profile {
             .name {
-                margin-top: 20px;
+                margin-top: 5px;
+                margin-bottom: 15px;
                 color: #666b7d;
             }
 
             .description {
-                margin: 20px;
+                margin-top: 5px;
+                margin-bottom: 20px;
                 color: #666b7d;
             }
         }
@@ -139,7 +141,7 @@ $shadow: 0 13px 26px rgba(rgb(255, 255, 255), 0.2), 0 3px 6px rgba(rgb(255, 255,
         }
     }
     .profile {
-        margin-top: 2.2em;
+        margin-top: 1em;
         position: relative;
 
         &:after {
@@ -202,38 +204,64 @@ $shadow: 0 13px 26px rgba(rgb(255, 255, 255), 0.2), 0 3px 6px rgba(rgb(255, 255,
             margin-bottom: 1.3em;
         }
 
-        .btn {
+        
+        .butt {
             color: #fff;
-            width: 130px;
-            height: 42px;
+            width: 150px;
+            height: 40px;
             outline: none;
             border: none;
             display: block;
             cursor: pointer;
-            font-weight: 300;
+            font-size: 15px;
             margin-bottom: 10px;
             margin-left: auto;
             margin-right: auto;
-            border-radius: 70px;
-            box-shadow: 0 13px 26px rgba(#000, 0.16), 0 3px 6px rgba(#000, 0.16);
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-align: center;	
+            text-decoration: none;
+            box-shadow: 0 5px #999;
             background: $purple-gradient;
         }
+        
+        .butt:hover {background-color: #3e8e41}
+        
+        .butt:active {
+            background-color: #d14d00;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
 
-        .btn2 {
+        .butt2 {
             color: #fff;
-            width: 130px;
-            height: 42px;
+            width: 150px;
+            height: 40px;
             outline: none;
             border: none;
             display: block;
             cursor: pointer;
-            font-weight: 300;
+            font-size: 15px;
+            margin-bottom: 10px;
             margin-left: auto;
             margin-right: auto;
-            border-radius: 70px;
-            box-shadow: 0 13px 26px rgba(#000, 0.16), 0 3px 6px rgba(#000, 0.16);
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-align: center;	
+            text-decoration: none;
+            box-shadow: 0 5px #999;
+            margin-bottom: 20px;
             background: $purple-gradient2;
         }
+        
+        .butt2:hover {background-color: #3e8e41}
+        
+        .butt2:active {
+            background-color: #d14d00;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
     }
 
     .social-icons {
