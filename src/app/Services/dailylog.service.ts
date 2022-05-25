@@ -107,4 +107,15 @@ export class DailylogService {
     });
   }
 
+  public async getLogsByWorker(idWorker: Number): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + 'worker/' + idWorker).toPromise();
+        resolve(result);
+      } catch(error) {
+        reject(error);
+      }
+    })
+  }
+
 }
