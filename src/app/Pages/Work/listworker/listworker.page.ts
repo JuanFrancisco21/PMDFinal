@@ -23,6 +23,7 @@ export class ListworkerPage implements OnInit {
   @ViewChild(IonDatetime, { static: true }) datetime: IonDatetime;
 
   public date = '';
+  segment: String = "active";
 
   public dailylogcheck:boolean;
   public datacoming:any;
@@ -106,7 +107,7 @@ export class ListworkerPage implements OnInit {
     this.wwlist = [];
     try {
       this.work = await this.workserv.getWorkById(this.work.id);
-      this.wwlist = this.work.workerWork;
+      this.wwlist = await this.workerserv.getWorkerFromWorkByCurrent((this.work.id), (this.segment.match('active')) ? true : false);
     } catch (err) {
       console.error(err);
       await this.notifications.presentToast("Error cargando datos", "danger");
@@ -154,12 +155,19 @@ export class ListworkerPage implements OnInit {
   clickSettings(workerwork:Workerwork){
     this.notifications.presentAlertConfirm().then((async data => {
       if (data) {
-        workerwork.current=false;
+        if(workerwork.current){
+          try{
+            await this.workerserv.deleteWorkerFromWork(workerwork);
+          }catch(error){
+            console.log(error);
+          }
+        }
       }
     }));
   }
 
   async showLogs(workerwork:Workerwork){
+    console.log(workerwork);
       let modal = await this.modalcontroller.create({
         component:LoglistComponent,
         componentProps:{
@@ -190,17 +198,15 @@ export class ListworkerPage implements OnInit {
 
     async showActionSheet(){
       const actionSheet = await this.actionSheet.create({
-        header: 'Albums',
+        header: 'Trabajadores',
         cssClass: 'my-custom-class',
         buttons: this.buttons
       });
       await actionSheet.present();
-  
-      const { role, data } = await actionSheet.onDidDismiss();
-      console.log('onDidDismiss resolved with role and data', role, data);
     
     }
 }
+
   
   
 
