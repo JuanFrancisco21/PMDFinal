@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_INITIALIZER } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Work } from '../Model/work';
 import { Worker } from '../Model/worker';
@@ -169,6 +169,29 @@ export class WorkerService {
         reject(error);
       }
     });
+  }
+
+
+  public async deleteWorkerFromWork(workerWork: Workerwork){
+      return new Promise(async (resolve, reject) => {
+        try{
+          let result: any = await this.http.delete(this.ENDPOINT + 'workerWork/' + workerWork.id).toPromise();
+          resolve(result);
+        }catch(error){
+          reject(error);
+        }
+      })
+  }
+
+  public async getWorkerFromWorkByCurrent(idWork: Number, current: boolean): Promise<Workerwork[]>{
+    return new Promise(async (resolve, reject) => {
+      try{
+        let result: any = await this.http.get(this.ENDPOINT + 'workerWork/' + idWork + '/' + current).toPromise();
+        resolve(result);
+      }catch(error){
+        reject(error);
+      }
+    })
   }
 
 

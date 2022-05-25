@@ -18,6 +18,14 @@
   </ion-item>
   </ion-col>
 </ion-row>
+<ion-segment [(ngModel)]="segment" (ionChange)="cargaWorkers()">
+  <ion-segment-button value="active">
+    <ion-label class="selector">Activos</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="nonActive">
+    <ion-label class="selector">No activos</ion-label>
+  </ion-segment-button>
+</ion-segment>
     <ion-refresher slot="fixed" (ionRefresh)="cargaWorkers($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
