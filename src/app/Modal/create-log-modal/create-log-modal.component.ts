@@ -65,7 +65,7 @@ export class CreateLogModalComponent implements OnInit {
     let dailylog : Dailylog={
       date:this.date,
       hours:this.hours,
-      workerwork:null
+      workerWork:null
     }
     
     this.notificationsServ.presentLoading();

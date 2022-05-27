@@ -59,6 +59,22 @@ export class DailylogService {
     });
   }
 
+  /**
+   * Método que devuelve una lista de dailylogs de un trabajador
+   * @param workerId La id del trabajador
+   * @returns Una lista de dailylogs
+   */
+  public async getLogsByWorker(workerId: Number): Promise<Dailylog[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + "/worker/" + workerId).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
  /**
   * Método que usaremos para crear un dailylog
   * @param log dailylog que queremos guardar
