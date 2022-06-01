@@ -13,6 +13,7 @@ export const environment = {
   apiWork: 'work/',
   apiWorker: 'worker/',
   apiDailylog: 'dailylogs/',
+  apiWorkerWork: 'workerWork/',
   apiName: 'name/',
   apiEmail: 'email/',
   apiActive: 'active/'

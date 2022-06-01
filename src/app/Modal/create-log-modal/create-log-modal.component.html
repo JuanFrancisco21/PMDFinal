@@ -1,9 +1,26 @@
 
-  <ion-label class="create">Nuevo dailylog</ion-label>
+<ion-content>
+  <div class="ion-text-end">
+    <ion-button (click)="close()">
+      <ion-icon name="close" id="close"></ion-icon>
+    </ion-button>
+  </div>
+  <div class="ion-text-center">Nuevo dailylog</div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+          <ion-button class="datePicker" expand="block" id="open-modal" (click)="resetDate()"><ion-icon name="today"></ion-icon></ion-button>
+              <ion-item>
+                <ion-input placeholder="Fecha seleccionada: {{this.date}}" id="date" disabled="true"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label id="hoursText" position="floating"><ion-icon id="hoursIcon" name="time"></ion-icon> Seleccione la cantidad de horas (8 por defecto)</ion-label>
+                <ion-input [(ngModel)]="hours" id="hours"  type="number" name="hours"></ion-input>
+              </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-
-
-      <ion-button class="datePicker" id="open-modal" (click)="resetDate()"><ion-icon name="today"></ion-icon></ion-button>
 
 <ion-modal trigger="open-modal">
     <ng-template>
@@ -16,12 +33,7 @@
         <ion-button id="accept" fill="clear" (click)="close()">Aceptar</ion-button>
     </ng-template>
 </ion-modal>
-<ion-item>
-  <ion-input placeholder="Fecha seleccionada: {{this.date}}" id="date" disabled="true"></ion-input>
-</ion-item>
-<ion-item>
-  <ion-label id="hoursText" position="floating">Seleccione la cantidad de horas (8 por defecto)</ion-label>
-  <ion-input [(ngModel)]="hours" id="hours"  type="number" name="hours"><ion-icon id="hoursIcon" name="time"></ion-icon></ion-input>
-</ion-item>
 <ion-button size="large" expand="block" (click)="createDailylog()"><ion-icon name="save"></ion-icon></ion-button>
+
+</ion-content>
 

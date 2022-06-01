@@ -77,6 +77,7 @@ export class CreateLogModalComponent implements OnInit {
           });
     }
     this.notificationsServ.dismissLoading();
+    this.close();
   }
 
   close(){
