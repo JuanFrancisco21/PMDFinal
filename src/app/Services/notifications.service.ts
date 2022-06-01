@@ -55,6 +55,43 @@ export class NotificationsService {
     })
   }
 
+  async presentAlert(header: string, msg: string): Promise<Boolean> {
+    /*let header=this.translate.instant('REMOVE');
+    let message=this.translate.instant('MESSAGE');
+    let cancel=this.translate.instant('CANCEL');
+    let accept=this.translate.instant('YES');*/
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: Boolean = false;
+        const alert = await this.alertController.create({
+          cssClass: 'my-custom-class',
+          header: header,
+          message: msg,
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              cssClass: 'secondary',
+              handler: (blah) => {
+                resolve(result);
+              }
+            }, {
+              text: 'Aceptar',
+              handler: () => {
+                resolve(result = true);
+              }
+            }
+          ]
+        });
+
+        await alert.present();
+      } catch (err) {
+        reject(err)
+      }
+
+    })
+  }
+
   /**
    * Presenta una pantalla de carga.
    */

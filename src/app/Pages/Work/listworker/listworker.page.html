@@ -14,7 +14,7 @@
   <ion-row justify-content-center>
   <ion-col size="12">
     <ion-item id="title" text-center>
-    <ion-label >Lista de trabajadores</ion-label>
+    <ion-label class="ion-text-center">Lista de trabajadores</ion-label>
   </ion-item>
   </ion-col>
 </ion-row>
@@ -35,7 +35,7 @@
           <img src="{{ww.worker.picture}}">
         </ion-avatar>
         <ion-label (click)="showLogs(ww)">{{ww.worker.name}}   {{ww.worker.surname}}</ion-label>
-        <ion-item><ion-checkbox [(ngModel)]="ww.dailylogcheck" (click)="enableButton = true;" checked="false"></ion-checkbox></ion-item>
+        <ion-checkbox [(ngModel)]="ww.dailylogcheck" *ngIf="ww.current" (click)="enableButton = true;" checked="false"></ion-checkbox>
         <ion-button class="settings" (click)="clickSettings(ww)"><ion-icon name="settings-outline"></ion-icon></ion-button>
       </ion-item>
     </ion-list>

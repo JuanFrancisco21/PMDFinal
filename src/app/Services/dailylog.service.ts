@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Dailylog } from '../Model/dailylog';
+import { Workerwork } from '../Model/workerwork';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Dailylog } from '../Model/dailylog';
 export class DailylogService {
 
   public ENDPOINT = environment.endpoint + environment.apiDailylog;
+  public ENDPOINTWW = environment.endpoint + environment.apiWorkerWork;
 
   constructor(public http: HttpClient) { }
 

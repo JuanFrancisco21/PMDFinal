@@ -183,6 +183,17 @@ export class WorkerService {
       })
   }
 
+  public async activateWorkerFromWork(idWorkerWork: Number){
+    return new Promise(async (resolve, reject) => {
+      try{
+        let result: any = await this.http.put(this.ENDPOINT + 'workerWork/' + idWorkerWork, {}).toPromise();
+        resolve(result);
+      } catch (error){
+        reject(error);
+      }
+    })
+  }
+
   public async getWorkerFromWorkByCurrent(idWork: Number, current: boolean): Promise<Workerwork[]>{
     return new Promise(async (resolve, reject) => {
       try{
