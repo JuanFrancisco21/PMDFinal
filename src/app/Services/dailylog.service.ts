@@ -97,10 +97,10 @@ export class DailylogService {
    * @param year es el año del periodo de tiempo
    * @returns Una lista de dailylogs
    */
-  public async getLogsByMonth(month: Number, year: Number): Promise<Dailylog[]> {
+  public async getLogsByMonth(year: Number, month: Number): Promise<Dailylog[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.get(this.ENDPOINT + "/month/" + year + '/' + month).toPromise();
+        let result: any = await this.http.get(this.ENDPOINT + "month/" + year + '/' + month).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);
@@ -115,10 +115,10 @@ export class DailylogService {
    * @param workerId es la id del trabajador
    * @returns Una lista de dailylogs
    */
-  public async getLogsByMonthUser(month: Number, year: Number, workerId: Number): Promise<Dailylog[]> {
+  public async getLogsByMonthUser(year: Number, month: Number, workerId: Number): Promise<Dailylog[]> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.get(this.ENDPOINT + "/worker/" + workerId + "/month/" + year + '/' + month).toPromise();
+        let result: any = await this.http.get(this.ENDPOINT + "worker/" + workerId + "/month/" + year + '/' + month).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);
@@ -133,7 +133,7 @@ export class DailylogService {
    * @param workId es la id del trabajo
    * @returns Una lista de dailylogs
    */
-  public async getLogsByMonthWork(month: Number, year: Number, workId: Number): Promise<Dailylog[]> {
+  public async getLogsByMonthWork(year: Number, month: Number, workId: Number): Promise<Dailylog[]> {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.get(this.ENDPOINT + "/work/" + workId + "/month/" + year + '/' + month).toPromise();
