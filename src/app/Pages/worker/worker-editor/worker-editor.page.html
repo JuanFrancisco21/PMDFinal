@@ -19,9 +19,14 @@
       <ion-card-title>{{worker.surname}}</ion-card-title>
     </ion-card-header>
   </ion-card>
-  
-  <ion-button (click)="exportExcel()">
+
+  <ion-datetime [(ngModel)]="dateTime" presentation="month-year" size="cover"></ion-datetime>
+  <ion-button expand="block" (click)="exportExcelDate()">
     <ion-icon name="download"></ion-icon> Exportar a Excel
+  </ion-button>
+  
+  <ion-button expand="block" (click)="exportExcel()">
+    <ion-icon name="download"></ion-icon> Exportar todo a Excel
   </ion-button>
 
 </ion-content>
