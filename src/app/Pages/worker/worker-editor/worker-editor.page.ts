@@ -11,30 +11,58 @@ import { ExcelService } from 'src/app/Services/excel.service';
 })
 export class WorkerEditorPage implements OnInit {
   @Input() worker: Worker;
-  private logs: any[] = [];
+  dateTime: String = new Date().toISOString();;
 
   constructor(private modalController: ModalController, private dailyLogService: DailylogService, private excelService: ExcelService) { }
 
-  ngOnInit() {
-    this.loadLogs();
-  }
+  ngOnInit() { }
 
-  private async loadLogs() {
+  private async loadLogs(): Promise<any> {
+    const logs: any[] = [];
     await this.dailyLogService.getLogsByWorker(this.worker.id).then(res => {
       res.forEach(element => {
-        this.logs.push({
+        logs.push({
           'Nombre y apellidos': element.workerWork.worker.name + ' ' + element.workerWork.worker.surname,
           'Obra': element.workerWork.work.name,
           'Fecha': element.date,
           'Horas': element.hours + ' horas',
         });
       });
-      console.log(this.logs);
+    });
+    return logs;
+  }
+
+  private async loadDateLogs(year: Number, month: Number): Promise<any> {
+    const logs: any[] = [];
+    await this.dailyLogService.getLogsByMonthUser(year, month, this.worker.id).then(res => {
+      res.forEach(element => {
+        logs.push({
+          'Nombre y apellidos': element.workerWork.worker.name + ' ' + element.workerWork.worker.surname,
+          'Obra': element.workerWork.work.name,
+          'Fecha': element.date,
+          'Horas': element.hours + ' horas',
+        });
+      });
+    });
+    return logs;
+  }
+
+  exportExcelDate() {
+    this.loadDateLogs(Number(this.dateTime.split('-')[0]), Number(this.dateTime.split('-')[1])).then(logs => {
+      console.log(logs);
+      this.excelService.exportAsExcelFile(logs, this.worker.name + ' ' + this.worker.surname + '.xlsx');
+    }).catch(err => {
+      console.log(err);
     });
   }
 
-  exportExcel() {
-    this.excelService.exportAsExcelFile(this.logs, this.worker.name + ' ' + this.worker.surname + '.xlsx');
+  public exportExcel() {
+    this.loadLogs().then(logs => {
+      console.log(logs);
+      this.excelService.exportAsExcelFile(logs, this.worker.name + ' ' + this.worker.surname + '.xlsx');
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   public async closeEditor() {

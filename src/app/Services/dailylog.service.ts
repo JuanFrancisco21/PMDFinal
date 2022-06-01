@@ -61,6 +61,91 @@ export class DailylogService {
     });
   }
 
+  /**
+   * Método que devuelve una lista de dailylogs de un trabajador
+   * @param workerId La id del trabajador
+   * @returns Una lista de dailylogs
+   */
+  public async getLogsByWorker(workerId: Number): Promise<Dailylog[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + "/worker/" + workerId).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Método que devuelve una lista de dailylogs de un trabajo
+   * @param workId id del trabajador
+   * @returns Una lista de dailylogs
+   */
+  public async getLogsByWork(workId: Number): Promise<Dailylog[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + "/work/" + workId).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Método que devuelve una lista de dailylogs de un periodo de tiempo
+   * @param month es el mes del periodo de tiempo
+   * @param year es el año del periodo de tiempo
+   * @returns Una lista de dailylogs
+   */
+  public async getLogsByMonth(year: Number, month: Number): Promise<Dailylog[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + "month/" + year + '/' + month).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Método que devuelve una lista de dailylogs de un trabajador en un periodo de tiempo
+   * @param month es el mes del periodo de tiempo
+   * @param year es el año del periodo de tiempo
+   * @param workerId es la id del trabajador
+   * @returns Una lista de dailylogs
+   */
+  public async getLogsByMonthUser(year: Number, month: Number, workerId: Number): Promise<Dailylog[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + "worker/" + workerId + "/month/" + year + '/' + month).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Método que devuelve una lista de dailylogs de un trabajo en un periodo de tiempo
+   * @param month es el mes del periodo de tiempo
+   * @param year es el año del periodo de tiempo
+   * @param workId es la id del trabajo
+   * @returns Una lista de dailylogs
+   */
+  public async getLogsByMonthWork(year: Number, month: Number, workId: Number): Promise<Dailylog[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + "/work/" + workId + "/month/" + year + '/' + month).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
  /**
   * Método que usaremos para crear un dailylog
   * @param log dailylog que queremos guardar
@@ -107,17 +192,6 @@ export class DailylogService {
         reject(error);
       }
     });
-  }
-
-  public async getLogsByWorker(idWorker: Number): Promise<any> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let result: any = await this.http.get(this.ENDPOINT + 'worker/' + idWorker).toPromise();
-        resolve(result);
-      } catch(error) {
-        reject(error);
-      }
-    })
   }
 
 }
