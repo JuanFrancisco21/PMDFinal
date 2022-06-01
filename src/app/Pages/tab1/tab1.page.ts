@@ -90,14 +90,10 @@ export class Tab1Page {
    * @param work a actualizar
    */
   public async changeActive(work: Work) {
-    this.notifications.presentLoading();
 
     work.active = (this.segment.match("active")) ? false : true;
     await this.workservice.updateWork(work);
-
     this.loadworks();
-
-    this.notifications.dismissLoading();
 
   }
 
