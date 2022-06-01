@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Dailylog } from '../Model/dailylog';
+import { Workerwork } from '../Model/workerwork';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Dailylog } from '../Model/dailylog';
 export class DailylogService {
 
   public ENDPOINT = environment.endpoint + environment.apiDailylog;
+  public ENDPOINTWW = environment.endpoint + environment.apiWorkerWork;
 
   constructor(public http: HttpClient) { }
 
@@ -52,22 +54,6 @@ export class DailylogService {
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.get(this.ENDPOINT + "/date/" + date).toPromise();
-        resolve(result);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-
-  /**
-   * Método que devuelve una lista de dailylogs de un trabajador
-   * @param workerId La id del trabajador
-   * @returns Una lista de dailylogs
-   */
-  public async getLogsByWorker(workerId: Number): Promise<Dailylog[]> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let result: any = await this.http.get(this.ENDPOINT + "/worker/" + workerId).toPromise();
         resolve(result);
       } catch (error) {
         reject(error);

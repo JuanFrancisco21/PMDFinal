@@ -153,17 +153,32 @@ export class ListworkerPage implements OnInit {
   }
 
   clickSettings(workerwork:Workerwork){
-    this.notifications.presentAlertConfirm().then((async data => {
-      if (data) {
-        if(workerwork.current){
-          try{
-            await this.workerserv.deleteWorkerFromWork(workerwork);
-          }catch(error){
-            console.log(error);
+    console.log(workerwork.current)
+    if(workerwork.current){
+      this.notifications.presentAlertConfirm().then((async data => {
+        if (data) {
+          if(workerwork.current){
+            try{
+              await this.workerserv.deleteWorkerFromWork(workerwork);
+            }catch(error){
+              console.log(error);
+            }
           }
         }
-      }
-    }));
+      }));
+    }else{
+      this.notifications.presentAlert('Reactivar trabajador', 'Va a reactivar al trabajador ' + workerwork.worker.name + ' , ¿está seguro?').then((async data => {
+        if (data) {
+          if(!workerwork.current){
+            try{
+              await this.workerserv.activateWorkerFromWork(workerwork.id);
+            }catch(error){
+              console.log(error);
+            }
+          }
+        }
+      }));
+    }
   }
 
   async showLogs(workerwork:Workerwork){
