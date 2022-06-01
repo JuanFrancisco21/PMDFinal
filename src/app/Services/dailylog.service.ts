@@ -75,6 +75,23 @@ export class DailylogService {
     });
   }
 
+  /**
+   * Método que devuelve una lista de dailylogs de un periodo de tiempo
+   * @param month es el mes del periodo de tiempo
+   * @param year es el año del periodo de tiempo
+   * @returns 
+   */
+  public async getLogsByMonth(month: Number, year: Number): Promise<Dailylog[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.ENDPOINT + "/month/" + year + '/' + month).toPromise();
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
  /**
   * Método que usaremos para crear un dailylog
   * @param log dailylog que queremos guardar
