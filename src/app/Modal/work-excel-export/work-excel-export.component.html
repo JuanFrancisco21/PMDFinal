@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" size="large" (click)="closeEditor()">
+      <ion-icon name="arrow-back" color="dark"></ion-icon>
+    </ion-button>
+    <ion-title color="dark">Exportar logs a Excel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-datetime [(ngModel)]="dateTime" presentation="month-year" size="cover"></ion-datetime>
+  <ion-button expand="block" (click)="exportExcelDate()">
+    <ion-icon name="download"></ion-icon> Exportar a Excel
+  </ion-button>
+
+  <ion-button expand="block" (click)="exportExcel()">
+    <ion-icon name="download"></ion-icon> Exportar todo a Excel
+  </ion-button>
+
+</ion-content>

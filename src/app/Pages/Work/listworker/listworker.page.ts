@@ -11,6 +11,7 @@ import { DailylogService } from 'src/app/Services/dailylog.service';
 import { Dailylog } from 'src/app/Model/dailylog';
 import { LoglistComponent } from 'src/app/Modal/loglist/loglist.component';
 import { CreateLogModalComponent } from 'src/app/Modal/create-log-modal/create-log-modal.component';
+import { WorkExcelExportComponent } from 'src/app/Modal/work-excel-export/work-excel-export.component';
 
 @Component({
   selector: 'app-listworker',
@@ -192,6 +193,17 @@ export class ListworkerPage implements OnInit {
       });
       return modal.present();
     }
+
+  public async showExcelExport() {
+    await this.modalcontroller.create({
+      component: WorkExcelExportComponent,
+      componentProps: {
+        'work': this.work
+      }
+    }).then(modal => {
+      modal.present();
+    });
+  }
 
     async showLogCreate(){
       for(let index of this.wwlist){

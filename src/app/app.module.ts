@@ -23,13 +23,14 @@ import { DailylogService } from './Services/dailylog.service';
 import { LoglistComponent } from './Modal/loglist/loglist.component';
 import { CommonModule } from '@angular/common';
 import { CreateLogModalComponent } from './Modal/create-log-modal/create-log-modal.component';
+import { WorkExcelExportComponent } from './Modal/work-excel-export/work-excel-export.component';
 
 export function loadTranslator(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, LoglistComponent, CreateLogModalComponent  ],
+  declarations: [AppComponent, LoglistComponent, CreateLogModalComponent, WorkExcelExportComponent ],
   entryComponents: [LoglistComponent],
   imports: [
     BrowserModule,

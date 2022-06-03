@@ -42,6 +42,10 @@
 </ion-grid>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="showExcelExport()">
+    <ion-icon name="download"></ion-icon>
+  </ion-fab-button>
+
   <ion-fab-button [disabled]="!this.enableButton" (click)="showLogCreate()">
     <ion-icon name="time-outline"></ion-icon>
   </ion-fab-button>
