@@ -10,7 +10,7 @@ export interface Work {
         x: Number,
         y: Number,
     },
-    chief: Worker,
-    workerWork: Workerwork[]
+    chief?: Worker,
+    workerWork?: Workerwork[]
 
 }

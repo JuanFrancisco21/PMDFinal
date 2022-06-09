@@ -48,7 +48,7 @@ export class CreateLogModalComponent implements OnInit {
     try{
       console.log(await this.dailylogserv.createLog(dailylog, workerworkid));
     }catch(error){
-      console.log(error);
+      this.notificationsServ.presentToast('Error al crear el dailylog', 'danger');
     }
   }
 
