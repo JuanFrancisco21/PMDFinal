@@ -18,9 +18,16 @@ ion-button{
 
 .datePicker{
     width: 60%;
-    height: 10rem;
+    height: 5rem;
     margin: auto;
     margin-top: 10rem;
+}
+
+#save{
+        width: 60%;
+        height: 5rem;
+        margin: auto;
+        margin-top: 3rem;
 }
 
 #dateTime{
@@ -41,4 +48,9 @@ div{
 
 #hoursIcon{
     margin-right: 20px;
+}
+
+#accept{
+    margin-left: 0;
+    width: 100%;
 }

@@ -1,8 +1,21 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-icon class="ion-icon" name="arrow-back-outline" slot="start" (click)="goBack()"></ion-icon>
-    <ion-title class="ion-text-center">{{this.work.name}}</ion-title>
+    <ion-button slot="start" fill="clear" size="large" (click)="goBack()">
+      <ion-icon name="arrow-back" color="dark"></ion-icon>
+    </ion-button>
+    <ion-title (click)="goBack()" class="ion-text-center">
+      Lista de Trabajadores
+    </ion-title>
   </ion-toolbar>
+
+  <ion-segment [(ngModel)]="segment" (ionChange)="cargaWorkers()">
+    <ion-segment-button value="active">
+      <ion-label class="selector">Activos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="nonActive">
+      <ion-label class="selector">No activos</ion-label>
+    </ion-segment-button>
+  </ion-segment>  
 </ion-header>
 
 <ion-content>
@@ -11,21 +24,7 @@
 
 
 <ion-grid>
-  <ion-row justify-content-center>
-  <ion-col size="12">
-    <ion-item id="title" text-center>
-    <ion-label class="ion-text-center">Lista de trabajadores</ion-label>
-  </ion-item>
-  </ion-col>
-</ion-row>
-<ion-segment [(ngModel)]="segment" (ionChange)="cargaWorkers()">
-  <ion-segment-button value="active">
-    <ion-label class="selector">Activos</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="nonActive">
-    <ion-label class="selector">No activos</ion-label>
-  </ion-segment-button>
-</ion-segment>
+
     <ion-refresher slot="fixed" (ionRefresh)="cargaWorkers($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>

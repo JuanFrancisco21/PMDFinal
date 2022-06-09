@@ -73,14 +73,16 @@ export class ListworkerPage implements OnInit {
     this.wwlist=this.work.workerWork;
     this.workers = await this.workerserv.getAllWorkers();
     for(let index of this.workers){
-      this.buttons.push({
-        text: index.name,
-        icon: 'add',
-        role: 'add',
-        handler: () => {
-          this.addWorker(index);
-        }
-      })
+      if(index.active == true){
+        this.buttons.push({
+          text: index.name,
+          icon: 'add',
+          role: 'add',
+          handler: () => {
+            this.addWorker(index);
+          }
+        })
+      }
 
     }
     await this.cargaWorkers();
@@ -110,7 +112,6 @@ export class ListworkerPage implements OnInit {
       this.work = await this.workserv.getWorkById(this.work.id);
       this.wwlist = await this.workerserv.getWorkerFromWorkByCurrent((this.work.id), (this.segment.match('active')) ? true : false);
     } catch (err) {
-      console.error(err);
       await this.notifications.presentToast("Error cargando datos", "danger");
     } finally {
       if (event) {
@@ -125,22 +126,23 @@ export class ListworkerPage implements OnInit {
     if(worker != null){
      let workerwork = await this.workerserv.addWorkertoWork(worker, this.work).then(response => {
        this.notifications.presentToast(('Trabajador ' + worker.name + ' añadido a la obra ' + this.work.name), 'success');
+       this.cargaWorkers();
      }).catch(error => {
        this.notifications.presentToast('Error al añadir trabajador, asegúrese de que ese trabajador no esté ya añadido a la obra', 'danger');
      });
     }
+
   }
 
   getValue(worker:Worker) : void{
-    console.log(worker);
     this.worker = worker;
   }
     
-  onClickAddLog(){
-    if(!this.addingLog){
-      this.addingLog = true;
+  onClickAddLog(worker: Workerwork){
+    if(!worker.dailylogcheck){
+      worker.dailylogcheck = true;
     }else{
-      this.addingLog = false;
+      worker.dailylogcheck = false;
     }
   }
 
@@ -148,21 +150,22 @@ export class ListworkerPage implements OnInit {
     try{
       console.log(await this.dailylogserv.createLog(dailylog, workerworkid));
     }catch(error){
-      console.log(error);
+      this.notifications.presentToast('Error al crear nuevos registros', 'danger');
     }
     this.addingLog = false;
+    this.cargaWorkers();
   }
 
-  clickSettings(workerwork:Workerwork){
-    console.log(workerwork.current)
+  async clickSettings(workerwork:Workerwork){
     if(workerwork.current){
-      this.notifications.presentAlertConfirm().then((async data => {
+      await this.notifications.presentAlertConfirm().then((async data => {
         if (data) {
           if(workerwork.current){
             try{
               await this.workerserv.deleteWorkerFromWork(workerwork);
+              this.cargaWorkers();
             }catch(error){
-              console.log(error);
+              this.notifications.presentToast('Error al desactivar al trabajador', 'danger');
             }
           }
         }
@@ -173,8 +176,9 @@ export class ListworkerPage implements OnInit {
           if(!workerwork.current){
             try{
               await this.workerserv.activateWorkerFromWork(workerwork.id);
+              this.cargaWorkers();
             }catch(error){
-              console.log(error);
+              this.notifications.presentToast('Error al reactivar al trabajador', 'danger');
             }
           }
         }
@@ -231,7 +235,6 @@ export class ListworkerPage implements OnInit {
         buttons: this.buttons
       });
       await actionSheet.present();
-    
     }
 }
 

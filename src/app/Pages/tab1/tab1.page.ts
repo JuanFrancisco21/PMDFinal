@@ -91,8 +91,20 @@ export class Tab1Page {
    */
   public async changeActive(work: Work) {
 
-    work.active = (this.segment.match("active")) ? false : true;
-    await this.workservice.updateWork(work);
+    let workToEdit: Work={
+      id: work.id,
+      //chief: work.chief,
+      active: (this.segment.match('active') ? false : true),
+      description: work.description,
+      location: work.location,
+      name: work.name   
+    }
+    //work.active = (this.segment.match("active")) ? false : true;
+    await this.workservice.updateWork(workToEdit).catch(
+      error=> {
+        console.log(error);
+      }
+    );
     this.loadworks();
 
   }
