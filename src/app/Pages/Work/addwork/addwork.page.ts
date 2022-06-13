@@ -68,4 +68,8 @@ export class AddworkPage implements OnInit {
     return saveWork;
   }
 
+  goBack(){
+    this.modalController.dismiss();
+  }
+
 }
