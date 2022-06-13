@@ -42,6 +42,21 @@ ion-button{
 	margin: 10px;
 }
 
+.centrado{
+	text-align: center;
+}
 div{
 	margin-bottom: 20px;
+}
+.subir{
+    padding: 5px 10px 10px 10px;
+    background: #f55d3e;
+    color:#fff;
+    border:0px solid #fff;
+}
+ 
+
+.subir:hover{
+    color:#fff;
+    background: #f73d18;
 }
